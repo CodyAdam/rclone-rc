@@ -1,0 +1,50 @@
+{
+  "name": "rclone-rc",
+  "version": "0.1.0",
+  "description": "A fully typed TypeScript API client for Rclone RC",
+  "homepage": "https://github.com/CodyAdam/rclone-rc",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CodyAdam/rclone-rc.git"
+  },
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf dist",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "prepublishOnly": "pnpm run clean && pnpm run lint && pnpm run build",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "keywords": [
+    "rclone",
+    "rclone-rc",
+    "api-client",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "@typescript-eslint/eslint-plugin": "^7.3.1",
+    "@typescript-eslint/parser": "^7.3.1",
+    "eslint": "^9.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "prettier": "^3.2.5",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.4.3",
+    "vitest": "^1.2.2"
+  },
+  "dependencies": {
+    "@zodios/core": "^10.9.6",
+    "axios": "^1.6.7",
+    "zod": "^3.22.4"
+  }
+}
