@@ -1,0 +1,1464 @@
+{
+  "openapi": "3.0.2",
+  "paths": {
+    "/rc/noop": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "nullable": true
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jobid": {
+                      "type": "number",
+                      "description": "ID of the asynchronous job"
+                    }
+                  },
+                  "required": [
+                    "jobid"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "input": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      },
+                      "description": "Input parameters that caused the error"
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "API path that was called"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP status code"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rc/noopauth": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "nullable": true
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jobid": {
+                      "type": "number",
+                      "description": "ID of the asynchronous job"
+                    }
+                  },
+                  "required": [
+                    "jobid"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "input": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      },
+                      "description": "Input parameters that caused the error"
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "API path that was called"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP status code"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/core/version": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "_async": {
+                    "type": "boolean",
+                    "description": "If set run asynchronously, which means the command will return a job id and then return"
+                  },
+                  "_config": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "nullable": true
+                    },
+                    "description": "A dictionary of config parameters to control the command execution"
+                  },
+                  "_filter": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "nullable": true
+                    },
+                    "description": "A dictionary of filter parameters to apply for this command only"
+                  },
+                  "_group": {
+                    "type": "string",
+                    "description": "Group name for this command to track stats under a custom name"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jobid": {
+                      "type": "number",
+                      "description": "ID of the asynchronous job"
+                    }
+                  },
+                  "required": [
+                    "jobid"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "input": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      },
+                      "description": "Input parameters that caused the error"
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "API path that was called"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP status code"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/operations/list": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fs": {
+                    "type": "string",
+                    "description": "a remote name string e.g. \"drive:\""
+                  },
+                  "remote": {
+                    "type": "string",
+                    "description": "a path within that remote e.g. \"dir\""
+                  },
+                  "opt": {
+                    "type": "object",
+                    "properties": {
+                      "recurse": {
+                        "type": "boolean",
+                        "description": "If set recurse directories"
+                      },
+                      "noModTime": {
+                        "type": "boolean",
+                        "description": "If set return modification time"
+                      },
+                      "showEncrypted": {
+                        "type": "boolean",
+                        "description": "If set show decrypted names"
+                      },
+                      "showOrigIDs": {
+                        "type": "boolean",
+                        "description": "If set show the IDs for each item if known"
+                      },
+                      "showHash": {
+                        "type": "boolean",
+                        "description": "If set return a dictionary of hashes"
+                      },
+                      "noMimeType": {
+                        "type": "boolean",
+                        "description": "If set don't show mime types"
+                      },
+                      "dirsOnly": {
+                        "type": "boolean",
+                        "description": "If set only show directories"
+                      },
+                      "filesOnly": {
+                        "type": "boolean",
+                        "description": "If set only show files"
+                      },
+                      "metadata": {
+                        "type": "boolean",
+                        "description": "If set return metadata of objects also"
+                      },
+                      "hashTypes": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "array of strings of hash types to show if showHash set"
+                      }
+                    },
+                    "description": "a dictionary of options to control the listing (optional)"
+                  },
+                  "_async": {
+                    "type": "boolean",
+                    "description": "If set run asynchronously, which means the command will return a job id and then return"
+                  },
+                  "_config": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "nullable": true
+                    },
+                    "description": "A dictionary of config parameters to control the command execution"
+                  },
+                  "_filter": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "nullable": true
+                    },
+                    "description": "A dictionary of filter parameters to apply for this command only"
+                  },
+                  "_group": {
+                    "type": "string",
+                    "description": "Group name for this command to track stats under a custom name"
+                  }
+                },
+                "required": [
+                  "fs",
+                  "remote"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jobid": {
+                      "type": "number",
+                      "description": "ID of the asynchronous job"
+                    }
+                  },
+                  "required": [
+                    "jobid"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "input": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      },
+                      "description": "Input parameters that caused the error"
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "API path that was called"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP status code"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/operations/about": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fs": {
+                    "type": "string",
+                    "description": "a remote name string e.g. \"drive:\""
+                  },
+                  "_async": {
+                    "type": "boolean",
+                    "description": "If set run asynchronously, which means the command will return a job id and then return"
+                  },
+                  "_config": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "nullable": true
+                    },
+                    "description": "A dictionary of config parameters to control the command execution"
+                  },
+                  "_filter": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "nullable": true
+                    },
+                    "description": "A dictionary of filter parameters to apply for this command only"
+                  },
+                  "_group": {
+                    "type": "string",
+                    "description": "Group name for this command to track stats under a custom name"
+                  }
+                },
+                "required": [
+                  "fs"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jobid": {
+                      "type": "number",
+                      "description": "ID of the asynchronous job"
+                    }
+                  },
+                  "required": [
+                    "jobid"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "input": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      },
+                      "description": "Input parameters that caused the error"
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "API path that was called"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP status code"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/operations/uploadfile": {
+      "post": {
+        "tags": [],
+        "parameters": [
+          {
+            "name": "fs",
+            "in": "query",
+            "description": "a remote name string e.g. \"drive:\"",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "remote",
+            "in": "query",
+            "description": "a path within that remote e.g. \"dir\"",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_async",
+            "in": "query",
+            "description": "If set run asynchronously, which means the command will return a job id and then return",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "_config",
+            "in": "query",
+            "description": "A dictionary of config parameters to control the command execution",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "nullable": true
+              }
+            }
+          },
+          {
+            "name": "_filter",
+            "in": "query",
+            "description": "A dictionary of filter parameters to apply for this command only",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "nullable": true
+              }
+            }
+          },
+          {
+            "name": "_group",
+            "in": "query",
+            "description": "Group name for this command to track stats under a custom name",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "nullable": true
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jobid": {
+                      "type": "number",
+                      "description": "ID of the asynchronous job"
+                    }
+                  },
+                  "required": [
+                    "jobid"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "input": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      },
+                      "description": "Input parameters that caused the error"
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "API path that was called"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP status code"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/core/stats": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "_async": {
+                    "type": "boolean",
+                    "description": "If set run asynchronously, which means the command will return a job id and then return"
+                  },
+                  "_config": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "nullable": true
+                    },
+                    "description": "A dictionary of config parameters to control the command execution"
+                  },
+                  "_filter": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "nullable": true
+                    },
+                    "description": "A dictionary of filter parameters to apply for this command only"
+                  },
+                  "_group": {
+                    "type": "string",
+                    "description": "Group name for this command to track stats under a custom name"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jobid": {
+                      "type": "number",
+                      "description": "ID of the asynchronous job"
+                    }
+                  },
+                  "required": [
+                    "jobid"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "input": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      },
+                      "description": "Input parameters that caused the error"
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "API path that was called"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP status code"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/operations/purge": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fs": {
+                    "type": "string",
+                    "description": "a remote name string e.g. \"drive:\""
+                  },
+                  "remote": {
+                    "type": "string",
+                    "description": "a path within that remote e.g. \"dir\""
+                  },
+                  "_async": {
+                    "type": "boolean",
+                    "description": "If set run asynchronously, which means the command will return a job id and then return"
+                  },
+                  "_config": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "nullable": true
+                    },
+                    "description": "A dictionary of config parameters to control the command execution"
+                  },
+                  "_filter": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "nullable": true
+                    },
+                    "description": "A dictionary of filter parameters to apply for this command only"
+                  },
+                  "_group": {
+                    "type": "string",
+                    "description": "Group name for this command to track stats under a custom name"
+                  }
+                },
+                "required": [
+                  "fs",
+                  "remote"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jobid": {
+                      "type": "number",
+                      "description": "ID of the asynchronous job"
+                    }
+                  },
+                  "required": [
+                    "jobid"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "input": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      },
+                      "description": "Input parameters that caused the error"
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "API path that was called"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP status code"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/operations/mkdir": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fs": {
+                    "type": "string",
+                    "description": "a remote name string e.g. \"drive:\""
+                  },
+                  "remote": {
+                    "type": "string",
+                    "description": "a path within that remote e.g. \"dir\""
+                  },
+                  "_async": {
+                    "type": "boolean",
+                    "description": "If set run asynchronously, which means the command will return a job id and then return"
+                  },
+                  "_config": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "nullable": true
+                    },
+                    "description": "A dictionary of config parameters to control the command execution"
+                  },
+                  "_filter": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "nullable": true
+                    },
+                    "description": "A dictionary of filter parameters to apply for this command only"
+                  },
+                  "_group": {
+                    "type": "string",
+                    "description": "Group name for this command to track stats under a custom name"
+                  }
+                },
+                "required": [
+                  "fs",
+                  "remote"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jobid": {
+                      "type": "number",
+                      "description": "ID of the asynchronous job"
+                    }
+                  },
+                  "required": [
+                    "jobid"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "input": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      },
+                      "description": "Input parameters that caused the error"
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "API path that was called"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP status code"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/operations/rmdir": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fs": {
+                    "type": "string",
+                    "description": "a remote name string e.g. \"drive:\""
+                  },
+                  "remote": {
+                    "type": "string",
+                    "description": "a path within that remote e.g. \"dir\""
+                  },
+                  "_async": {
+                    "type": "boolean",
+                    "description": "If set run asynchronously, which means the command will return a job id and then return"
+                  },
+                  "_config": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "nullable": true
+                    },
+                    "description": "A dictionary of config parameters to control the command execution"
+                  },
+                  "_filter": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "nullable": true
+                    },
+                    "description": "A dictionary of filter parameters to apply for this command only"
+                  },
+                  "_group": {
+                    "type": "string",
+                    "description": "Group name for this command to track stats under a custom name"
+                  }
+                },
+                "required": [
+                  "fs",
+                  "remote"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jobid": {
+                      "type": "number",
+                      "description": "ID of the asynchronous job"
+                    }
+                  },
+                  "required": [
+                    "jobid"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "input": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      },
+                      "description": "Input parameters that caused the error"
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "API path that was called"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP status code"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/job/list": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "_async": {
+                    "type": "boolean",
+                    "description": "If set run asynchronously, which means the command will return a job id and then return"
+                  },
+                  "_config": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "nullable": true
+                    },
+                    "description": "A dictionary of config parameters to control the command execution"
+                  },
+                  "_filter": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "nullable": true
+                    },
+                    "description": "A dictionary of filter parameters to apply for this command only"
+                  },
+                  "_group": {
+                    "type": "string",
+                    "description": "Group name for this command to track stats under a custom name"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jobid": {
+                      "type": "number",
+                      "description": "ID of the asynchronous job"
+                    }
+                  },
+                  "required": [
+                    "jobid"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "input": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      },
+                      "description": "Input parameters that caused the error"
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "API path that was called"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP status code"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/job/status": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "jobid": {
+                    "type": "number",
+                    "description": "id of the job (integer)"
+                  },
+                  "_async": {
+                    "type": "boolean",
+                    "description": "If set run asynchronously, which means the command will return a job id and then return"
+                  },
+                  "_config": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "nullable": true
+                    },
+                    "description": "A dictionary of config parameters to control the command execution"
+                  },
+                  "_filter": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "nullable": true
+                    },
+                    "description": "A dictionary of filter parameters to apply for this command only"
+                  },
+                  "_group": {
+                    "type": "string",
+                    "description": "Group name for this command to track stats under a custom name"
+                  }
+                },
+                "required": [
+                  "jobid"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jobid": {
+                      "type": "number",
+                      "description": "ID of the asynchronous job"
+                    }
+                  },
+                  "required": [
+                    "jobid"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "input": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      },
+                      "description": "Input parameters that caused the error"
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "API path that was called"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP status code"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/job/stop": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "jobid": {
+                    "type": "number",
+                    "description": "id of the job (integer)"
+                  },
+                  "_async": {
+                    "type": "boolean",
+                    "description": "If set run asynchronously, which means the command will return a job id and then return"
+                  },
+                  "_config": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "nullable": true
+                    },
+                    "description": "A dictionary of config parameters to control the command execution"
+                  },
+                  "_filter": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "nullable": true
+                    },
+                    "description": "A dictionary of filter parameters to apply for this command only"
+                  },
+                  "_group": {
+                    "type": "string",
+                    "description": "Group name for this command to track stats under a custom name"
+                  }
+                },
+                "required": [
+                  "jobid"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jobid": {
+                      "type": "number",
+                      "description": "ID of the asynchronous job"
+                    }
+                  },
+                  "required": [
+                    "jobid"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "input": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      },
+                      "description": "Input parameters that caused the error"
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "API path that was called"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP status code"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/job/stopgroup": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "group": {
+                    "type": "string",
+                    "description": "name of the group (string)"
+                  },
+                  "_async": {
+                    "type": "boolean",
+                    "description": "If set run asynchronously, which means the command will return a job id and then return"
+                  },
+                  "_config": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "nullable": true
+                    },
+                    "description": "A dictionary of config parameters to control the command execution"
+                  },
+                  "_filter": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "nullable": true
+                    },
+                    "description": "A dictionary of filter parameters to apply for this command only"
+                  },
+                  "_group": {
+                    "type": "string",
+                    "description": "Group name for this command to track stats under a custom name"
+                  }
+                },
+                "required": [
+                  "group"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jobid": {
+                      "type": "number",
+                      "description": "ID of the asynchronous job"
+                    }
+                  },
+                  "required": [
+                    "jobid"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "input": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      },
+                      "description": "Input parameters that caused the error"
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "API path that was called"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP status code"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "info": {
+    "title": "Rclone RC Async API",
+    "version": "0.1.0",
+    "description": "A fully type-safe TypeScript API client for Rclone's Remote Control (RC) interface with async support",
+    "contact": {
+      "name": "GitHub Repository",
+      "url": "https://github.com/CodyAdam/rclone-rc"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  }
+}

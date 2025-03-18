@@ -1,14 +1,25 @@
 # rclone-rc
 
-A fully typed TypeScript API client for rclone's Remote Control (RC) interface.
+A fully type-safe TypeScript API client for [Rclone's Remote Control](https://rclone.org/rc/) (RC) interface, powered by [@ts-rest](https://github.com/ts-rest/ts-rest) and [Zod](https://github.com/colinhacks/zod).
 
-## Features
+## ⚠️ Work in Progress
 
-- 🔒 Fully typed API client for rclone RC 
-- 📜 TypeScript 5.4+ with strict typing
-- 🔄 Built with Zodios for type-safe API calls
-- 🧩 Node 22+ compatible
-- 🌐 Simple and intuitive interface
+This library is currently under active development. Only 13 out of 87 Rclone RC commands are implemented so far.
+
+Consider contributing if you need a specific command:
+
+1. Check `src/api/index.ts` for current implementation
+2. Add your needed command following the same pattern
+3. Open a Pull Request
+
+## ✨ Features
+
+- **🔒 Fully Type-Safe**: End-to-end type safety for all API calls, including async operations
+- **📄 OpenAPI Support**: Generated spec for integration with any language/client
+- **🧩 Framework Agnostic**: Works with any fetch client
+- **🚀 Async Operations**: First-class support for Rclone's async operations
+- **✅ Runtime Validation**: Uses Zod to validate types at runtime
+- **💪 HTTP Status Handling**: Error responses handled through typed status codes
 
 ## Installation
 
@@ -25,90 +36,125 @@ pnpm add rclone-rc
 
 ## Usage
 
-```typescript
-import { RcloneClient } from 'rclone-rc';
+### Basic Client
 
-// Create a client
-const client = new RcloneClient({
-  baseUrl: 'http://localhost:5572', // Default
-  username: 'your-username', // Optional
-  password: 'your-password', // Optional
-  timeout: 30000, // Default: 30 seconds
+```typescript
+import { createClient } from 'rclone-rc';
+
+const client = createClient({
+  baseUrl: 'http://localhost:5572',
+  username: 'your-username', // Optional if running with --rc-no-auth
+  password: 'your-password', // Optional if running with --rc-no-auth
 });
 
-// Make API calls
-async function example() {
-  try {
-    // Get rclone version
-    const version = await client.getVersion();
-    console.log('Rclone version:', version.result.version);
-    
-    // Get stats
-    const stats = await client.getStats();
-    console.log('Transfer speed:', stats.result.speed);
-    
-    // List remotes
-    const remotes = await client.listRemotes();
-    console.log('Available remotes:', Object.keys(remotes.result.remotes));
-    
-    // Make a custom call
-    const result = await client.call('operations/list', {
-      fs: 'remote:path',
-      recursive: true,
-    });
-    console.log('Files:', result.result);
-  } catch (error) {
-    console.error('Error:', error);
-  }
-}
+try {
+  // Get rclone version with typed response
+  const { status, body } = await client.version();
 
-example();
+  if (status === 200) {
+    console.log('Rclone version:', body.version); // typed
+  } else if (status === 500) {
+    console.log('Error:', body.error); // also typed
+  }
+
+  // List files with type-safe parameters and response
+  const files = await client.list({
+    body: { fs: 'remote:path', remote: '' }
+  });
+
+  if (files.status === 200) {
+    console.log('Files:', files.body.list);
+  }
+} catch (error) {
+  // Only network errors will throw exceptions
+  console.error('Network error:', error);
+}
 ```
 
-## Available Methods
+### Error Handling
 
-- `call<T>(path: string, params?: object): Promise<RcloneResponse<T>>` - Make a custom call to any RC endpoint
-- `getVersion(): Promise<RcloneResponse<VersionInfo>>` - Get rclone version information
-- `getStats(): Promise<RcloneResponse<StatsInfo>>` - Get current transfer statistics
-- `listRemotes(): Promise<RcloneResponse<RemotesInfo>>` - List all configured remotes
+This library handles errors in two ways:
 
-## Type Definitions
+1. **HTTP Status Errors**: Returned as typed responses with appropriate status codes
+2. **Network Errors**: Thrown as exceptions when server is unreachable
 
-The library includes full TypeScript type definitions for the rclone RC API.
+### Async Operations
+
+For long-running operations:
+
+```typescript
+import { createAsyncClient } from 'rclone-rc';
+
+const asyncClient = createAsyncClient({ baseUrl: 'http://localhost:5572' });
+
+try {
+  // Start async job
+  const job = await asyncClient.list({
+    body: {
+      fs: 'remote:path',
+      remote: '',
+      _async: true, // Type-safe flag for async operations
+    }
+  });
+
+  // Access job ID and check status
+  const jobId = job.body.jobid;
+  const status = await client.jobStatus({ body: { jobid: jobId } });
+
+  if (status.status === 200 && status.body.finished) {
+    console.log('Job output:', status.body.output);
+  }
+} catch (error) {
+  console.error('Network error:', error);
+}
+```
+
+## Runtime Type Validation
+
+Zod validates both request and response types at runtime:
+
+- **Request validation**: Parameters, body, and query are validated before sending
+- **Response validation**: Can be disabled with `validateResponse: false` in client options
+  ```typescript
+  const client = createClient({
+    baseUrl: 'http://localhost:5572',
+    validateResponse: false, // true by default
+  });
+  ```
+
+## OpenAPI Integration
+
+Generate an OpenAPI specification for use with other languages and tools:
+
+```typescript
+import { generateOpenApi } from '@ts-rest/open-api';
+import { rcloneContract } from 'rclone-rc';
+
+const openApiDocument = generateOpenApi(rcloneContract, {
+  info: { title: 'Rclone RC API', version: '1.0.0' }
+});
+```
+
+Access the raw OpenAPI specifications at:
+- https://raw.githubusercontent.com/CodyAdam/rclone-rc/main/openapi.json
+- https://raw.githubusercontent.com/CodyAdam/rclone-rc/main/async.openapi.json
 
 ## Development
 
 ```bash
-# Install dependencies
-pnpm install
-
-# Build the project
-pnpm build
-
-# Run tests
-pnpm test
-
-# Run tests in watch mode
-pnpm test:watch
-
-# Lint code
-pnpm lint
-
-# Format code
-pnpm format
+pnpm install     # Install dependencies
+pnpm build       # Build the project
+pnpm test        # Run tests
+pnpm lint        # Lint code
+pnpm format      # Format code
+pnpm openapi     # Generate OpenAPI spec
 ```
 
 ## Requirements
 
-- Node.js 22 or higher
-- TypeScript 5.4 or higher
-
-## Dependencies
-
-- Zodios - Type-safe API client
-- Zod - TypeScript-first schema validation
-- Axios - Promise based HTTP client
+- Node.js 18+
+- TypeScript 5.0+
 
 ## License
 
-MIT 
+MIT

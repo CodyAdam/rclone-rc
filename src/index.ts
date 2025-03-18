@@ -1,4 +1,11 @@
-import { createClient, RcloneRcOptions } from './client';
+import { rcloneAsyncContract, rcloneContract } from './api';
+import { createAsyncClient, createClient, RcloneRcOptions } from './client';
 
 export default createClient;
-export { createClient, RcloneRcOptions };
+export {
+  createAsyncClient,
+  createClient,
+  rcloneAsyncContract,
+  rcloneContract,
+  type RcloneRcOptions,
+};
