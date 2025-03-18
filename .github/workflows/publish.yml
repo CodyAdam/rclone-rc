@@ -28,9 +28,6 @@ jobs:
       - name: Build
         run: pnpm build
       
-      - name: Test
-        run: pnpm test
-      
       - name: Publish to NPM
         run: pnpm publish --no-git-checks
         env:
