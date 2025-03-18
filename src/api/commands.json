@@ -1,0 +1,700 @@
+{
+	"commands": [
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters:\n\n- command - a string with the command name\n- fs - a remote name string e.g. \"drive:\"\n- arg - a list of arguments for the backend command\n- opt - a map of string to string of options\n\nReturns:\n\n- result - result from the backend command\n\nExample:\n\n    rclone rc backend/command command=noop fs=. -o echo=yes -o blue -a path1 -a path2\n\nReturns\n\n```\n{\n\t\"result\": {\n\t\t\"arg\": [\n\t\t\t\"path1\",\n\t\t\t\"path2\"\n\t\t],\n\t\t\"name\": \"noop\",\n\t\t\"opt\": {\n\t\t\t\"blue\": \"\",\n\t\t\t\"echo\": \"yes\"\n\t\t}\n\t}\n}\n```\n\nNote that this is the direct equivalent of using this \"backend\"\ncommand:\n\n    rclone backend noop . -o echo=yes -o blue path1 path2\n\nNote that arguments must be preceded by the \"-a\" flag\n\nSee the [backend](/commands/rclone_backend/) command for more information.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "backend/command",
+			"Title": "Runs a backend command."
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters:\n\n- name - name of remote\n- parameters - a map of \\{ \"key\": \"value\" \\} pairs\n- type - type of the new remote\n- opt - a dictionary of options to control the configuration\n    - obscure - declare passwords are plain and need obscuring\n    - noObscure - declare passwords are already obscured and don't need obscuring\n    - noOutput - don't print anything to stdout\n    - nonInteractive - don't interact with a user, return questions\n    - continue - continue the config process with an answer\n    - all - ask all the config questions not just the post config ones\n    - state - state to restart with - used with continue\n    - result - result to restart with - used with continue\n\n\nSee the [config create](/commands/rclone_config_create/) command for more information on the above.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "config/create",
+			"Title": "create the config for a remote."
+		},
+		{
+			"AuthRequired": true,
+			"Help": "Parameters:\n\n- name - name of remote to delete\n\nSee the [config delete](/commands/rclone_config_delete/) command for more information on the above.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "config/delete",
+			"Title": "Delete a remote in the config file."
+		},
+		{
+			"AuthRequired": true,
+			"Help": "Returns a JSON object:\n- key: value\n\nWhere keys are remote names and values are the config parameters.\n\nSee the [config dump](/commands/rclone_config_dump/) command for more information on the above.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "config/dump",
+			"Title": "Dumps the config file."
+		},
+		{
+			"AuthRequired": true,
+			"Help": "Parameters:\n\n- name - name of remote to get\n\nSee the [config dump](/commands/rclone_config_dump/) command for more information on the above.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "config/get",
+			"Title": "Get a remote in the config file."
+		},
+		{
+			"AuthRequired": true,
+			"Help": "Returns\n- remotes - array of remote names\n\nSee the [listremotes](/commands/rclone_listremotes/) command for more information on the above.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "config/listremotes",
+			"Title": "Lists the remotes in the config file and defined in environment variables."
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters:\n\n- name - name of remote\n- parameters - a map of \\{ \"key\": \"value\" \\} pairs\n\n\nSee the [config password](/commands/rclone_config_password/) command for more information on the above.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "config/password",
+			"Title": "password the config for a remote."
+		},
+		{
+			"AuthRequired": true,
+			"Help": "Returns a JSON object with the following keys:\n\n- config: path to config file\n- cache: path to root of cache directory\n- temp: path to root of temporary directory\n\nEg\n\n    {\n        \"cache\": \"/home/USER/.cache/rclone\",\n        \"config\": \"/home/USER/.rclone.conf\",\n        \"temp\": \"/tmp\"\n    }\n\nSee the [config paths](/commands/rclone_config_paths/) command for more information on the above.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "config/paths",
+			"Title": "Reads the config file path and other important paths."
+		},
+		{
+			"AuthRequired": true,
+			"Help": "Returns a JSON object:\n- providers - array of objects\n\nSee the [config providers](/commands/rclone_config_providers/) command\nfor more information on the above.\n\nNote that the Options blocks are in the same format as returned by\n\"options/info\". They are described in the\n[option blocks](#option-blocks) section.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "config/providers",
+			"Title": "Shows how providers are configured in the config file."
+		},
+		{
+			"AuthRequired": true,
+			"Help": "Parameters:\n\n- path - path to the config file to use",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "config/setpath",
+			"Title": "Set the path of the config file"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters:\n\n- name - name of remote\n- parameters - a map of \\{ \"key\": \"value\" \\} pairs\n- opt - a dictionary of options to control the configuration\n    - obscure - declare passwords are plain and need obscuring\n    - noObscure - declare passwords are already obscured and don't need obscuring\n    - noOutput - don't print anything to stdout\n    - nonInteractive - don't interact with a user, return questions\n    - continue - continue the config process with an answer\n    - all - ask all the config questions not just the post config ones\n    - state - state to restart with - used with continue\n    - result - result to restart with - used with continue\n\n\nSee the [config update](/commands/rclone_config_update/) command for more information on the above.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "config/update",
+			"Title": "update the config for a remote."
+		},
+		{
+			"AuthRequired": false,
+			"Help": "This sets the bandwidth limit to the string passed in. This should be\na single bandwidth limit entry or a pair of upload:download bandwidth.\n\nEg\n\n    rclone rc core/bwlimit rate=off\n    {\n        \"bytesPerSecond\": -1,\n        \"bytesPerSecondTx\": -1,\n        \"bytesPerSecondRx\": -1,\n        \"rate\": \"off\"\n    }\n    rclone rc core/bwlimit rate=1M\n    {\n        \"bytesPerSecond\": 1048576,\n        \"bytesPerSecondTx\": 1048576,\n        \"bytesPerSecondRx\": 1048576,\n        \"rate\": \"1M\"\n    }\n    rclone rc core/bwlimit rate=1M:100k\n    {\n        \"bytesPerSecond\": 1048576,\n        \"bytesPerSecondTx\": 1048576,\n        \"bytesPerSecondRx\": 131072,\n        \"rate\": \"1M\"\n    }\n\n\nIf the rate parameter is not supplied then the bandwidth is queried\n\n    rclone rc core/bwlimit\n    {\n        \"bytesPerSecond\": 1048576,\n        \"bytesPerSecondTx\": 1048576,\n        \"bytesPerSecondRx\": 1048576,\n        \"rate\": \"1M\"\n    }\n\nThe format of the parameter is exactly the same as passed to --bwlimit\nexcept only one bandwidth may be specified.\n\nIn either case \"rate\" is returned as a human-readable string, and\n\"bytesPerSecond\" is returned as a number.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "core/bwlimit",
+			"Title": "Set the bandwidth limit."
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters:\n\n- command - a string with the command name.\n- arg - a list of arguments for the backend command.\n- opt - a map of string to string of options.\n- returnType - one of (\"COMBINED_OUTPUT\", \"STREAM\", \"STREAM_ONLY_STDOUT\", \"STREAM_ONLY_STDERR\").\n    - Defaults to \"COMBINED_OUTPUT\" if not set.\n    - The STREAM returnTypes will write the output to the body of the HTTP message.\n    - The COMBINED_OUTPUT will write the output to the \"result\" parameter.\n\nReturns:\n\n- result - result from the backend command.\n    - Only set when using returnType \"COMBINED_OUTPUT\".\n- error\t - set if rclone exits with an error code.\n- returnType - one of (\"COMBINED_OUTPUT\", \"STREAM\", \"STREAM_ONLY_STDOUT\", \"STREAM_ONLY_STDERR\").\n\nExample:\n\n    rclone rc core/command command=ls -a mydrive:/ -o max-depth=1\n    rclone rc core/command -a ls -a mydrive:/ -o max-depth=1\n\nReturns:\n\n```\n{\n\t\"error\": false,\n\t\"result\": \"\u003cRaw command line output\u003e\"\n}\n\nOR\n{\n\t\"error\": true,\n\t\"result\": \"\u003cRaw command line output\u003e\"\n}\n\n```",
+			"NeedsRequest": true,
+			"NeedsResponse": true,
+			"Path": "core/command",
+			"Title": "Run a rclone terminal command over rc."
+		},
+		{
+			"AuthRequired": false,
+			"Help": "This returns the disk usage for the local directory passed in as dir.\n\nIf the directory is not passed in, it defaults to the directory\npointed to by --cache-dir.\n\n- dir - string (optional)\n\nReturns:\n\n```\n{\n\t\"dir\": \"/\",\n\t\"info\": {\n\t\t\"Available\": 361769115648,\n\t\t\"Free\": 361785892864,\n\t\t\"Total\": 982141468672\n\t}\n}\n```",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "core/du",
+			"Title": "Returns disk usage of a locally attached disk."
+		},
+		{
+			"AuthRequired": false,
+			"Help": "This tells the go runtime to do a garbage collection run.  It isn't\nnecessary to call this normally, but it can be useful for debugging\nmemory problems.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "core/gc",
+			"Title": "Runs a garbage collection."
+		},
+		{
+			"AuthRequired": false,
+			"Help": "This returns list of stats groups currently in memory. \n\nReturns the following values:\n```\n{\n\t\"groups\":  an array of group names:\n\t\t[\n\t\t\t\"group1\",\n\t\t\t\"group2\",\n\t\t\t...\n\t\t]\n}\n```",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "core/group-list",
+			"Title": "Returns list of stats."
+		},
+		{
+			"AuthRequired": false,
+			"Help": "This returns the memory statistics of the running program.  What the values mean\nare explained in the go docs: https://golang.org/pkg/runtime/#MemStats\n\nThe most interesting values for most people are:\n\n- HeapAlloc - this is the amount of memory rclone is actually using\n- HeapSys - this is the amount of memory rclone has obtained from the OS\n- Sys - this is the total amount of memory requested from the OS\n   - It is virtual memory so may include unused memory",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "core/memstats",
+			"Title": "Returns the memory statistics"
+		},
+		{
+			"AuthRequired": false,
+			"Help": "Pass a clear string and rclone will obscure it for the config file:\n- clear - string\n\nReturns:\n- obscured - string",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "core/obscure",
+			"Title": "Obscures a string passed in."
+		},
+		{
+			"AuthRequired": false,
+			"Help": "This returns PID of current process.\nUseful for stopping rclone process.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "core/pid",
+			"Title": "Return PID of current process"
+		},
+		{
+			"AuthRequired": false,
+			"Help": "(Optional) Pass an exit code to be used for terminating the app:\n- exitCode - int",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "core/quit",
+			"Title": "Terminates the app."
+		},
+		{
+			"AuthRequired": false,
+			"Help": "This returns all available stats:\n\n\trclone rc core/stats\n\nIf group is not provided then summed up stats for all groups will be\nreturned.\n\nParameters\n\n- group - name of the stats group (string, optional)\n- short - if true will not return the transferring and checking arrays (boolean, optional)\n\nReturns the following values:\n\n```\n{\n\t\"bytes\": total transferred bytes since the start of the group,\n\t\"checks\": number of files checked,\n\t\"deletes\" : number of files deleted,\n\t\"elapsedTime\": time in floating point seconds since rclone was started,\n\t\"errors\": number of errors,\n\t\"eta\": estimated time in seconds until the group completes,\n\t\"fatalError\": boolean whether there has been at least one fatal error,\n\t\"lastError\": last error string,\n\t\"renames\" : number of files renamed,\n\t\"retryError\": boolean showing whether there has been at least one non-NoRetryError,\n        \"serverSideCopies\": number of server side copies done,\n        \"serverSideCopyBytes\": number bytes server side copied,\n        \"serverSideMoves\": number of server side moves done,\n        \"serverSideMoveBytes\": number bytes server side moved,\n\t\"speed\": average speed in bytes per second since start of the group,\n\t\"totalBytes\": total number of bytes in the group,\n\t\"totalChecks\": total number of checks in the group,\n\t\"totalTransfers\": total number of transfers in the group,\n\t\"transferTime\" : total time spent on running jobs,\n\t\"transfers\": number of transferred files,\n\t\"transferring\": an array of currently active file transfers:\n\t\t[\n\t\t\t{\n\t\t\t\t\"bytes\": total transferred bytes for this file,\n\t\t\t\t\"eta\": estimated time in seconds until file transfer completion\n\t\t\t\t\"name\": name of the file,\n\t\t\t\t\"percentage\": progress of the file transfer in percent,\n\t\t\t\t\"speed\": average speed over the whole transfer in bytes per second,\n\t\t\t\t\"speedAvg\": current speed in bytes per second as an exponentially weighted moving average,\n\t\t\t\t\"size\": size of the file in bytes\n\t\t\t}\n\t\t],\n\t\"checking\": an array of names of currently active file checks\n\t\t[]\n}\n```\nValues for \"transferring\", \"checking\" and \"lastError\" are only assigned if data is available.\nThe value for \"eta\" is null if an eta cannot be determined.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "core/stats",
+			"Title": "Returns stats about current transfers."
+		},
+		{
+			"AuthRequired": false,
+			"Help": "This deletes entire stats group.\n\nParameters\n\n- group - name of the stats group (string)",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "core/stats-delete",
+			"Title": "Delete stats group."
+		},
+		{
+			"AuthRequired": false,
+			"Help": "This clears counters, errors and finished transfers for all stats or specific \nstats group if group is provided.\n\nParameters\n\n- group - name of the stats group (string)",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "core/stats-reset",
+			"Title": "Reset stats."
+		},
+		{
+			"AuthRequired": false,
+			"Help": "This returns stats about completed transfers:\n\n\trclone rc core/transferred\n\nIf group is not provided then completed transfers for all groups will be\nreturned.\n\nNote only the last 100 completed transfers are returned.\n\nParameters\n\n- group - name of the stats group (string)\n\nReturns the following values:\n```\n{\n\t\"transferred\":  an array of completed transfers (including failed ones):\n\t\t[\n\t\t\t{\n\t\t\t\t\"name\": name of the file,\n\t\t\t\t\"size\": size of the file in bytes,\n\t\t\t\t\"bytes\": total transferred bytes for this file,\n\t\t\t\t\"checked\": if the transfer is only checked (skipped, deleted),\n\t\t\t\t\"timestamp\": integer representing millisecond unix epoch,\n\t\t\t\t\"error\": string description of the error (empty if successful),\n\t\t\t\t\"jobid\": id of the job that this transfer belongs to\n\t\t\t}\n\t\t]\n}\n```",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "core/transferred",
+			"Title": "Returns stats about completed transfers."
+		},
+		{
+			"AuthRequired": false,
+			"Help": "This shows the current version of go and the go runtime:\n\n- version - rclone version, e.g. \"v1.53.0\"\n- decomposed - version number as [major, minor, patch]\n- isGit - boolean - true if this was compiled from the git version\n- isBeta - boolean - true if this is a beta version\n- os - OS in use as according to Go\n- arch - cpu architecture in use according to Go\n- goVersion - version of Go runtime in use\n- linking - type of rclone executable (static or dynamic)\n- goTags - space separated build tags or \"none\"",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "core/version",
+			"Title": "Shows the current version of rclone and the go runtime."
+		},
+		{
+			"AuthRequired": false,
+			"Help": "SetBlockProfileRate controls the fraction of goroutine blocking events\nthat are reported in the blocking profile. The profiler aims to sample\nan average of one blocking event per rate nanoseconds spent blocked.\n\nTo include every blocking event in the profile, pass rate = 1. To turn\noff profiling entirely, pass rate \u003c= 0.\n\nAfter calling this you can use this to see the blocking profile:\n\n    go tool pprof http://localhost:5572/debug/pprof/block\n\nParameters:\n\n- rate - int",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "debug/set-block-profile-rate",
+			"Title": "Set runtime.SetBlockProfileRate for blocking profiling."
+		},
+		{
+			"AuthRequired": false,
+			"Help": "SetGCPercent sets the garbage collection target percentage: a collection is triggered\nwhen the ratio of freshly allocated data to live data remaining after the previous collection\nreaches this percentage. SetGCPercent returns the previous setting. The initial setting is the\nvalue of the GOGC environment variable at startup, or 100 if the variable is not set.\n\nThis setting may be effectively reduced in order to maintain a memory limit.\nA negative percentage effectively disables garbage collection, unless the memory limit is reached.\n\nSee https://pkg.go.dev/runtime/debug#SetMemoryLimit for more details.\n\nParameters:\n\n- gc-percent - int",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "debug/set-gc-percent",
+			"Title": "Call runtime/debug.SetGCPercent for setting the garbage collection target percentage."
+		},
+		{
+			"AuthRequired": false,
+			"Help": "SetMutexProfileFraction controls the fraction of mutex contention\nevents that are reported in the mutex profile. On average 1/rate\nevents are reported. The previous rate is returned.\n\nTo turn off profiling entirely, pass rate 0. To just read the current\nrate, pass rate \u003c 0. (For n\u003e1 the details of sampling may change.)\n\nOnce this is set you can look use this to profile the mutex contention:\n\n    go tool pprof http://localhost:5572/debug/pprof/mutex\n\nParameters:\n\n- rate - int\n\nResults:\n\n- previousRate - int",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "debug/set-mutex-profile-fraction",
+			"Title": "Set runtime.SetMutexProfileFraction for mutex profiling."
+		},
+		{
+			"AuthRequired": false,
+			"Help": "SetMemoryLimit provides the runtime with a soft memory limit.\n\nThe runtime undertakes several processes to try to respect this memory limit, including\nadjustments to the frequency of garbage collections and returning memory to the underlying\nsystem more aggressively. This limit will be respected even if GOGC=off (or, if SetGCPercent(-1) is executed).\n\nThe input limit is provided as bytes, and includes all memory mapped, managed, and not\nreleased by the Go runtime. Notably, it does not account for space used by the Go binary\nand memory external to Go, such as memory managed by the underlying system on behalf of\nthe process, or memory managed by non-Go code inside the same process.\nExamples of excluded memory sources include: OS kernel memory held on behalf of the process,\nmemory allocated by C code, and memory mapped by syscall.Mmap (because it is not managed by the Go runtime).\n\nA zero limit or a limit that's lower than the amount of memory used by the Go runtime may cause\nthe garbage collector to run nearly continuously. However, the application may still make progress.\n\nThe memory limit is always respected by the Go runtime, so to effectively disable this behavior,\nset the limit very high. math.MaxInt64 is the canonical value for disabling the limit, but values\nmuch greater than the available memory on the underlying system work just as well.\n\nSee https://go.dev/doc/gc-guide for a detailed guide explaining the soft memory limit in more detail,\nas well as a variety of common use-cases and scenarios.\n\nSetMemoryLimit returns the previously set memory limit. A negative input does not adjust the limit,\nand allows for retrieval of the currently set memory limit.\n\nParameters:\n\n- mem-limit - int",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "debug/set-soft-memory-limit",
+			"Title": "Call runtime/debug.SetMemoryLimit for setting a soft memory limit for the runtime."
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This clears the fs cache. This is where remotes created from backends\nare cached for a short while to make repeated rc calls more efficient.\n\nIf you change the parameters of a backend then you may want to call\nthis to clear an existing remote out of the cache before re-creating\nit.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "fscache/clear",
+			"Title": "Clear the Fs cache."
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This returns the number of entries in the fs cache.\n\nReturns\n- entries - number of items in the cache",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "fscache/entries",
+			"Title": "Returns the number of entries in the fs cache."
+		},
+		{
+			"AuthRequired": false,
+			"Help": "Parameters: None.\n\nResults:\n\n- executeId - string id of rclone executing (change after restart)\n- jobids - array of integer job ids (starting at 1 on each restart)",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "job/list",
+			"Title": "Lists the IDs of the running jobs"
+		},
+		{
+			"AuthRequired": false,
+			"Help": "Parameters:\n\n- jobid - id of the job (integer).\n\nResults:\n\n- finished - boolean\n- duration - time in seconds that the job ran for\n- endTime - time the job finished (e.g. \"2018-10-26T18:50:20.528746884+01:00\")\n- error - error from the job or empty string for no error\n- finished - boolean whether the job has finished or not\n- id - as passed in above\n- startTime - time the job started (e.g. \"2018-10-26T18:50:20.528336039+01:00\")\n- success - boolean - true for success false otherwise\n- output - output of the job as would have been returned if called synchronously\n- progress - output of the progress related to the underlying job",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "job/status",
+			"Title": "Reads the status of the job ID"
+		},
+		{
+			"AuthRequired": false,
+			"Help": "Parameters:\n\n- jobid - id of the job (integer).",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "job/stop",
+			"Title": "Stop the running job"
+		},
+		{
+			"AuthRequired": false,
+			"Help": "Parameters:\n\n- group - name of the group (string).",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "job/stopgroup",
+			"Title": "Stop all running jobs in a group"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This shows currently mounted points, which can be used for performing an unmount.\n\nThis takes no parameters and returns\n\n- mountPoints: list of current mount points\n\nEg\n\n    rclone rc mount/listmounts",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "mount/listmounts",
+			"Title": "Show current mount points"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "rclone allows Linux, FreeBSD, macOS and Windows to mount any of\nRclone's cloud storage systems as a file system with FUSE.\n\nIf no mountType is provided, the priority is given as follows: 1. mount 2.cmount 3.mount2\n\nThis takes the following parameters:\n\n- fs - a remote path to be mounted (required)\n- mountPoint: valid path on the local machine (required)\n- mountType: one of the values (mount, cmount, mount2) specifies the mount implementation to use\n- mountOpt: a JSON object with Mount options in.\n- vfsOpt: a JSON object with VFS options in.\n\nExample:\n\n    rclone rc mount/mount fs=mydrive: mountPoint=/home/\u003cuser\u003e/mountPoint\n    rclone rc mount/mount fs=mydrive: mountPoint=/home/\u003cuser\u003e/mountPoint mountType=mount\n    rclone rc mount/mount fs=TestDrive: mountPoint=/mnt/tmp vfsOpt='{\"CacheMode\": 2}' mountOpt='{\"AllowOther\": true}'\n\nThe vfsOpt are as described in options/get and can be seen in the the\n\"vfs\" section when running and the mountOpt can be seen in the \"mount\" section:\n\n    rclone rc options/get",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "mount/mount",
+			"Title": "Create a new mount point"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This shows all possible mount types and returns them as a list.\n\nThis takes no parameters and returns\n\n- mountTypes: list of mount types\n\nThe mount types are strings like \"mount\", \"mount2\", \"cmount\" and can\nbe passed to mount/mount as the mountType parameter.\n\nEg\n\n    rclone rc mount/types",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "mount/types",
+			"Title": "Show all possible mount types"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "rclone allows Linux, FreeBSD, macOS and Windows to\nmount any of Rclone's cloud storage systems as a file system with\nFUSE.\n\nThis takes the following parameters:\n\n- mountPoint: valid path on the local machine where the mount was created (required)\n\nExample:\n\n    rclone rc mount/unmount mountPoint=/home/\u003cuser\u003e/mountPoint",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "mount/unmount",
+			"Title": "Unmount selected active mount"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "rclone allows Linux, FreeBSD, macOS and Windows to\nmount any of Rclone's cloud storage systems as a file system with\nFUSE.\n\nThis takes no parameters and returns error if unmount does not succeed.\n\nEg\n\n    rclone rc mount/unmountall",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "mount/unmountall",
+			"Title": "Unmount all active mounts"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters:\n\n- fs - a remote name string e.g. \"drive:\"\n\nThe result is as returned from rclone about --json\n\nSee the [about](/commands/rclone_about/) command for more information on the above.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "operations/about",
+			"Title": "Return the space used on the remote"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "Checks the files in the source and destination match.  It compares\nsizes and hashes and logs a report of files that don't\nmatch.  It doesn't alter the source or destination.\n\nThis takes the following parameters:\n\n- srcFs - a remote name string e.g. \"drive:\" for the source, \"/\" for local filesystem\n- dstFs - a remote name string e.g. \"drive2:\" for the destination, \"/\" for local filesystem\n- download - check by downloading rather than with hash\n- checkFileHash - treat checkFileFs:checkFileRemote as a SUM file with hashes of given type\n- checkFileFs - treat checkFileFs:checkFileRemote as a SUM file with hashes of given type\n- checkFileRemote - treat checkFileFs:checkFileRemote as a SUM file with hashes of given type\n- oneWay -  check one way only, source files must exist on remote\n- combined - make a combined report of changes (default false)\n- missingOnSrc - report all files missing from the source (default true)\n- missingOnDst - report all files missing from the destination (default true)\n- match - report all matching files (default false)\n- differ - report all non-matching files (default true)\n- error - report all files with errors (hashing or reading) (default true)\n\nIf you supply the download flag, it will download the data from\nboth remotes and check them against each other on the fly.  This can\nbe useful for remotes that don't support hashes or if you really want\nto check all the data.\n\nIf you supply the size-only global flag, it will only compare the sizes not\nthe hashes as well.  Use this for a quick check.\n\nIf you supply the checkFileHash option with a valid hash name, the\ncheckFileFs:checkFileRemote must point to a text file in the SUM\nformat. This treats the checksum file as the source and dstFs as the\ndestination. Note that srcFs is not used and should not be supplied in\nthis case.\n\nReturns:\n\n- success - true if no error, false otherwise\n- status - textual summary of check, OK or text string\n- hashType - hash used in check, may be missing\n- combined - array of strings of combined report of changes\n- missingOnSrc - array of strings of all files missing from the source\n- missingOnDst - array of strings of all files missing from the destination\n- match - array of strings of all matching files\n- differ - array of strings of all non-matching files\n- error - array of strings of all files with errors (hashing or reading)",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "operations/check",
+			"Title": "check the source and destination are the same"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters:\n\n- fs - a remote name string e.g. \"drive:\"\n\nSee the [cleanup](/commands/rclone_cleanup/) command for more information on the above.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "operations/cleanup",
+			"Title": "Remove trashed files in the remote or path"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters:\n\n- srcFs - a remote name string e.g. \"drive:\" for the source, \"/\" for local filesystem\n- srcRemote - a path within that remote e.g. \"file.txt\" for the source\n- dstFs - a remote name string e.g. \"drive2:\" for the destination, \"/\" for local filesystem\n- dstRemote - a path within that remote e.g. \"file2.txt\" for the destination",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "operations/copyfile",
+			"Title": "Copy a file from source remote to destination remote"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters:\n\n- fs - a remote name string e.g. \"drive:\"\n- remote - a path within that remote e.g. \"dir\"\n- url - string, URL to read from\n - autoFilename - boolean, set to true to retrieve destination file name from url\n\nSee the [copyurl](/commands/rclone_copyurl/) command for more information on the above.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "operations/copyurl",
+			"Title": "Copy the URL to the object"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters:\n\n- fs - a remote name string e.g. \"drive:\"\n\nSee the [delete](/commands/rclone_delete/) command for more information on the above.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "operations/delete",
+			"Title": "Remove files in the path"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters:\n\n- fs - a remote name string e.g. \"drive:\"\n- remote - a path within that remote e.g. \"dir\"\n\nSee the [deletefile](/commands/rclone_deletefile/) command for more information on the above.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "operations/deletefile",
+			"Title": "Remove the single file pointed to"
+		},
+		{
+			"AuthRequired": false,
+			"Help": "This takes the following parameters:\n\n- fs - a remote name string e.g. \"drive:\"\n\nThis returns info about the remote passed in;\n\n```\n{\n        // optional features and whether they are available or not\n        \"Features\": {\n                \"About\": true,\n                \"BucketBased\": false,\n                \"BucketBasedRootOK\": false,\n                \"CanHaveEmptyDirectories\": true,\n                \"CaseInsensitive\": false,\n                \"ChangeNotify\": false,\n                \"CleanUp\": false,\n                \"Command\": true,\n                \"Copy\": false,\n                \"DirCacheFlush\": false,\n                \"DirMove\": true,\n                \"Disconnect\": false,\n                \"DuplicateFiles\": false,\n                \"GetTier\": false,\n                \"IsLocal\": true,\n                \"ListR\": false,\n                \"MergeDirs\": false,\n                \"MetadataInfo\": true,\n                \"Move\": true,\n                \"OpenWriterAt\": true,\n                \"PublicLink\": false,\n                \"Purge\": true,\n                \"PutStream\": true,\n                \"PutUnchecked\": false,\n                \"ReadMetadata\": true,\n                \"ReadMimeType\": false,\n                \"ServerSideAcrossConfigs\": false,\n                \"SetTier\": false,\n                \"SetWrapper\": false,\n                \"Shutdown\": false,\n                \"SlowHash\": true,\n                \"SlowModTime\": false,\n                \"UnWrap\": false,\n                \"UserInfo\": false,\n                \"UserMetadata\": true,\n                \"WrapFs\": false,\n                \"WriteMetadata\": true,\n                \"WriteMimeType\": false\n        },\n        // Names of hashes available\n        \"Hashes\": [\n                \"md5\",\n                \"sha1\",\n                \"whirlpool\",\n                \"crc32\",\n                \"sha256\",\n                \"dropbox\",\n                \"mailru\",\n                \"quickxor\"\n        ],\n        \"Name\": \"local\",        // Name as created\n        \"Precision\": 1,         // Precision of timestamps in ns\n        \"Root\": \"/\",            // Path as created\n        \"String\": \"Local file system at /\", // how the remote will appear in logs\n        // Information about the system metadata for this backend\n        \"MetadataInfo\": {\n                \"System\": {\n                        \"atime\": {\n                                \"Help\": \"Time of last access\",\n                                \"Type\": \"RFC 3339\",\n                                \"Example\": \"2006-01-02T15:04:05.999999999Z07:00\"\n                        },\n                        \"btime\": {\n                                \"Help\": \"Time of file birth (creation)\",\n                                \"Type\": \"RFC 3339\",\n                                \"Example\": \"2006-01-02T15:04:05.999999999Z07:00\"\n                        },\n                        \"gid\": {\n                                \"Help\": \"Group ID of owner\",\n                                \"Type\": \"decimal number\",\n                                \"Example\": \"500\"\n                        },\n                        \"mode\": {\n                                \"Help\": \"File type and mode\",\n                                \"Type\": \"octal, unix style\",\n                                \"Example\": \"0100664\"\n                        },\n                        \"mtime\": {\n                                \"Help\": \"Time of last modification\",\n                                \"Type\": \"RFC 3339\",\n                                \"Example\": \"2006-01-02T15:04:05.999999999Z07:00\"\n                        },\n                        \"rdev\": {\n                                \"Help\": \"Device ID (if special file)\",\n                                \"Type\": \"hexadecimal\",\n                                \"Example\": \"1abc\"\n                        },\n                        \"uid\": {\n                                \"Help\": \"User ID of owner\",\n                                \"Type\": \"decimal number\",\n                                \"Example\": \"500\"\n                        }\n                },\n                \"Help\": \"Textual help string\\n\"\n        }\n}\n```\n\nThis command does not have a command line equivalent so use this instead:\n\n    rclone rc --loopback operations/fsinfo fs=remote:",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "operations/fsinfo",
+			"Title": "Return information about the remote"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "Produces a hash file for all the objects in the path using the hash\nnamed.  The output is in the same format as the standard\nmd5sum/sha1sum tool.\n\nThis takes the following parameters:\n\n- fs - a remote name string e.g. \"drive:\" for the source, \"/\" for local filesystem\n    - this can point to a file and just that file will be returned in the listing.\n- hashType - type of hash to be used\n- download - check by downloading rather than with hash (boolean)\n- base64 - output the hashes in base64 rather than hex (boolean)\n\nIf you supply the download flag, it will download the data from the\nremote and create the hash on the fly. This can be useful for remotes\nthat don't support the given hash or if you really want to check all\nthe data.\n\nNote that if you wish to supply a checkfile to check hashes against\nthe current files then you should use operations/check instead of\noperations/hashsum.\n\nReturns:\n\n- hashsum - array of strings of the hashes\n- hashType - type of hash used\n\nExample:\n\n    $ rclone rc --loopback operations/hashsum fs=bin hashType=MD5 download=true base64=true\n    {\n        \"hashType\": \"md5\",\n        \"hashsum\": [\n            \"WTSVLpuiXyJO_kGzJerRLg==  backend-versions.sh\",\n            \"v1b_OlWCJO9LtNq3EIKkNQ==  bisect-go-rclone.sh\",\n            \"VHbmHzHh4taXzgag8BAIKQ==  bisect-rclone.sh\",\n        ]\n    }\n\nSee the [hashsum](/commands/rclone_hashsum/) command for more information on the above.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "operations/hashsum",
+			"Title": "Produces a hashsum file for all the objects in the path."
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters:\n\n- fs - a remote name string e.g. \"drive:\"\n- remote - a path within that remote e.g. \"dir\"\n- opt - a dictionary of options to control the listing (optional)\n    - recurse - If set recurse directories\n    - noModTime - If set return modification time\n    - showEncrypted -  If set show decrypted names\n    - showOrigIDs - If set show the IDs for each item if known\n    - showHash - If set return a dictionary of hashes\n    - noMimeType - If set don't show mime types\n    - dirsOnly - If set only show directories\n    - filesOnly - If set only show files\n    - metadata - If set return metadata of objects also\n    - hashTypes - array of strings of hash types to show if showHash set\n\nReturns:\n\n- list\n    - This is an array of objects as described in the lsjson command\n\nSee the [lsjson](/commands/rclone_lsjson/) command for more information on the above and examples.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "operations/list",
+			"Title": "List the given remote and path in JSON format"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters:\n\n- fs - a remote name string e.g. \"drive:\"\n- remote - a path within that remote e.g. \"dir\"\n\nSee the [mkdir](/commands/rclone_mkdir/) command for more information on the above.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "operations/mkdir",
+			"Title": "Make a destination directory or container"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters:\n\n- srcFs - a remote name string e.g. \"drive:\" for the source, \"/\" for local filesystem\n- srcRemote - a path within that remote e.g. \"file.txt\" for the source\n- dstFs - a remote name string e.g. \"drive2:\" for the destination, \"/\" for local filesystem\n- dstRemote - a path within that remote e.g. \"file2.txt\" for the destination",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "operations/movefile",
+			"Title": "Move a file from source remote to destination remote"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters:\n\n- fs - a remote name string e.g. \"drive:\"\n- remote - a path within that remote e.g. \"dir\"\n- unlink - boolean - if set removes the link rather than adding it (optional)\n- expire - string - the expiry time of the link e.g. \"1d\" (optional)\n\nReturns:\n\n- url - URL of the resource\n\nSee the [link](/commands/rclone_link/) command for more information on the above.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "operations/publiclink",
+			"Title": "Create or retrieve a public link to the given file or folder."
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters:\n\n- fs - a remote name string e.g. \"drive:\"\n- remote - a path within that remote e.g. \"dir\"\n\nSee the [purge](/commands/rclone_purge/) command for more information on the above.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "operations/purge",
+			"Title": "Remove a directory or container and all of its contents"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters:\n\n- fs - a remote name string e.g. \"drive:\"\n- remote - a path within that remote e.g. \"dir\"\n\nSee the [rmdir](/commands/rclone_rmdir/) command for more information on the above.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "operations/rmdir",
+			"Title": "Remove an empty directory or container"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters:\n\n- fs - a remote name string e.g. \"drive:\"\n- remote - a path within that remote e.g. \"dir\"\n- leaveRoot - boolean, set to true not to delete the root\n\nSee the [rmdirs](/commands/rclone_rmdirs/) command for more information on the above.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "operations/rmdirs",
+			"Title": "Remove all the empty directories in the path"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters:\n\n- fs - a remote name string e.g. \"drive:\"\n\nSee the [settier](/commands/rclone_settier/) command for more information on the above.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "operations/settier",
+			"Title": "Changes storage tier or class on all files in the path"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters:\n\n- fs - a remote name string e.g. \"drive:\"\n- remote - a path within that remote e.g. \"dir\"\n\nSee the [settierfile](/commands/rclone_settierfile/) command for more information on the above.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "operations/settierfile",
+			"Title": "Changes storage tier or class on the single file pointed to"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters:\n\n- fs - a remote name string e.g. \"drive:path/to/dir\"\n\nReturns:\n\n- count - number of files\n- bytes - number of bytes in those files\n\nSee the [size](/commands/rclone_size/) command for more information on the above.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "operations/size",
+			"Title": "Count the number of bytes and files in remote"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters\n\n- fs - a remote name string eg \"drive:\"\n- remote - a path within that remote eg \"dir\"\n- opt - a dictionary of options to control the listing (optional)\n    - see operations/list for the options\n\nThe result is\n\n- item - an object as described in the lsjson command. Will be null if not found.\n\nNote that if you are only interested in files then it is much more\nefficient to set the filesOnly flag in the options.\n\nSee the [lsjson](/commands/rclone_lsjson/) command for more information on the above and examples.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "operations/stat",
+			"Title": "Give information about the supplied file or directory"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters:\n\n- fs - a remote name string e.g. \"drive:\"\n- remote - a path within that remote e.g. \"dir\"\n- each part in body represents a file to be uploaded\n\nSee the [uploadfile](/commands/rclone_uploadfile/) command for more information on the above.",
+			"NeedsRequest": true,
+			"NeedsResponse": false,
+			"Path": "operations/uploadfile",
+			"Title": "Upload file using multiform/form-data"
+		},
+		{
+			"AuthRequired": false,
+			"Help": "Returns:\n- options - a list of the options block names",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "options/blocks",
+			"Title": "List all the option blocks"
+		},
+		{
+			"AuthRequired": false,
+			"Help": "Returns an object where keys are option block names and values are an\nobject with the current option values in.\n\nParameters:\n\n- blocks: optional string of comma separated blocks to include\n    - all are included if this is missing or \"\"\n\nNote that these are the global options which are unaffected by use of\nthe _config and _filter parameters. If you wish to read the parameters\nset in _config then use options/config and for _filter use options/filter.\n\nThis shows the internal names of the option within rclone which should\nmap to the external options very easily with a few exceptions.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "options/get",
+			"Title": "Get all the global options"
+		},
+		{
+			"AuthRequired": false,
+			"Help": "Returns an object where keys are option block names and values are an\narray of objects with info about each options.\n\nParameters:\n\n- blocks: optional string of comma separated blocks to include\n    - all are included if this is missing or \"\"\n\nThese objects are in the same format as returned by \"config/providers\". They are\ndescribed in the [option blocks](#option-blocks) section.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "options/info",
+			"Title": "Get info about all the global options"
+		},
+		{
+			"AuthRequired": false,
+			"Help": "Returns an object with the keys \"config\" and \"filter\".\nThe \"config\" key contains the local config and the \"filter\" key contains\nthe local filters.\n\nNote that these are the local options specific to this rc call. If\n_config was not supplied then they will be the global options.\nLikewise with \"_filter\".\n\nThis call is mostly useful for seeing if _config and _filter passing\nis working.\n\nThis shows the internal names of the option within rclone which should\nmap to the external options very easily with a few exceptions.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "options/local",
+			"Title": "Get the currently active config for this call"
+		},
+		{
+			"AuthRequired": false,
+			"Help": "Parameters:\n\n- option block name containing an object with\n  - key: value\n\nRepeated as often as required.\n\nOnly supply the options you wish to change.  If an option is unknown\nit will be silently ignored.  Not all options will have an effect when\nchanged like this.\n\nFor example:\n\nThis sets DEBUG level logs (-vv) (these can be set by number or string)\n\n    rclone rc options/set --json '{\"main\": {\"LogLevel\": \"DEBUG\"}}'\n    rclone rc options/set --json '{\"main\": {\"LogLevel\": 8}}'\n\nAnd this sets INFO level logs (-v)\n\n    rclone rc options/set --json '{\"main\": {\"LogLevel\": \"INFO\"}}'\n\nAnd this sets NOTICE level logs (normal without -v)\n\n    rclone rc options/set --json '{\"main\": {\"LogLevel\": \"NOTICE\"}}'",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "options/set",
+			"Title": "Set an option"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "Used for adding a plugin to the webgui.\n\nThis takes the following parameters:\n\n- url - http url of the github repo where the plugin is hosted (http://github.com/rclone/rclone-webui-react).\n\nExample:\n\n   rclone rc pluginsctl/addPlugin",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "pluginsctl/addPlugin",
+			"Title": "Add a plugin using url"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This shows all possible plugins by a mime type.\n\nThis takes the following parameters:\n\n- type - supported mime type by a loaded plugin e.g. (video/mp4, audio/mp3).\n- pluginType - filter plugins based on their type e.g. (DASHBOARD, FILE_HANDLER, TERMINAL).\n\nReturns:\n\n- loadedPlugins - list of current production plugins.\n- testPlugins - list of temporarily loaded development plugins, usually running on a different server.\n\nExample:\n\n   rclone rc pluginsctl/getPluginsForType type=video/mp4",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "pluginsctl/getPluginsForType",
+			"Title": "Get plugins with type criteria"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This allows you to get the currently enabled plugins and their details.\n\nThis takes no parameters and returns:\n\n- loadedPlugins - list of current production plugins.\n- testPlugins - list of temporarily loaded development plugins, usually running on a different server.\n\nE.g.\n\n   rclone rc pluginsctl/listPlugins",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "pluginsctl/listPlugins",
+			"Title": "Get the list of currently loaded plugins"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "Allows listing of test plugins with the rclone.test set to true in package.json of the plugin.\n\nThis takes no parameters and returns:\n\n- loadedTestPlugins - list of currently available test plugins.\n\nE.g.\n\n    rclone rc pluginsctl/listTestPlugins",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "pluginsctl/listTestPlugins",
+			"Title": "Show currently loaded test plugins"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This allows you to remove a plugin using it's name.\n\nThis takes parameters:\n\n- name - name of the plugin in the format `author`/`plugin_name`.\n\nE.g.\n\n   rclone rc pluginsctl/removePlugin name=rclone/video-plugin",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "pluginsctl/removePlugin",
+			"Title": "Remove a loaded plugin"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This allows you to remove a plugin using it's name.\n\nThis takes the following parameters:\n\n- name - name of the plugin in the format `author`/`plugin_name`.\n\nExample:\n\n    rclone rc pluginsctl/removeTestPlugin name=rclone/rclone-webui-react",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "pluginsctl/removeTestPlugin",
+			"Title": "Remove  a test plugin"
+		},
+		{
+			"AuthRequired": false,
+			"Help": "This returns an error with the input as part of its error string.\nUseful for testing error handling.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "rc/error",
+			"Title": "This returns an error"
+		},
+		{
+			"AuthRequired": false,
+			"Help": "This lists all the registered remote control commands as a JSON map in\nthe commands response.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "rc/list",
+			"Title": "List all the registered remote control commands"
+		},
+		{
+			"AuthRequired": false,
+			"Help": "This echoes the input parameters to the output parameters for testing\npurposes.  It can be used to check that rclone is still alive and to\ncheck that parameter passing is working properly.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "rc/noop",
+			"Title": "Echo the input to the output parameters"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This echoes the input parameters to the output parameters for testing\npurposes.  It can be used to check that rclone is still alive and to\ncheck that parameter passing is working properly.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "rc/noopauth",
+			"Title": "Echo the input to the output parameters requiring auth"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters\n\n- path1 - a remote directory string e.g. `drive:path1`\n- path2 - a remote directory string e.g. `drive:path2`\n- dryRun - dry-run mode\n- resync - performs the resync run\n- checkAccess - abort if RCLONE_TEST files are not found on both filesystems\n- checkFilename - file name for checkAccess (default: RCLONE_TEST)\n- maxDelete - abort sync if percentage of deleted files is above\n  this threshold (default: 50)\n- force - Bypass maxDelete safety check and run the sync\n- checkSync - `true` by default, `false` disables comparison of final listings,\n              `only` will skip sync, only compare listings from the last run\n- createEmptySrcDirs - Sync creation and deletion of empty directories. \n\t\t\t  (Not compatible with --remove-empty-dirs)\n- removeEmptyDirs - remove empty directories at the final cleanup step\n- filtersFile - read filtering patterns from a file\n- ignoreListingChecksum - Do not use checksums for listings\n- resilient - Allow future runs to retry after certain less-serious errors, instead of requiring resync. \n            Use at your own risk!\n- workdir - server directory for history files (default: `~/.cache/rclone/bisync`)\n- backupdir1 - --backup-dir for Path1. Must be a non-overlapping path on the same remote.\n- backupdir2 - --backup-dir for Path2. Must be a non-overlapping path on the same remote.\n- noCleanup - retain working files\n\nSee [bisync command help](https://rclone.org/commands/rclone_bisync/)\nand [full bisync description](https://rclone.org/bisync/)\nfor more information.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "sync/bisync",
+			"Title": "Perform bidirectional synchronization between two paths."
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters:\n\n- srcFs - a remote name string e.g. \"drive:src\" for the source\n- dstFs - a remote name string e.g. \"drive:dst\" for the destination\n- createEmptySrcDirs - create empty src directories on destination if set\n\n\nSee the [copy](/commands/rclone_copy/) command for more information on the above.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "sync/copy",
+			"Title": "copy a directory from source remote to destination remote"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters:\n\n- srcFs - a remote name string e.g. \"drive:src\" for the source\n- dstFs - a remote name string e.g. \"drive:dst\" for the destination\n- createEmptySrcDirs - create empty src directories on destination if set\n- deleteEmptySrcDirs - delete empty src directories if set\n\n\nSee the [move](/commands/rclone_move/) command for more information on the above.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "sync/move",
+			"Title": "move a directory from source remote to destination remote"
+		},
+		{
+			"AuthRequired": true,
+			"Help": "This takes the following parameters:\n\n- srcFs - a remote name string e.g. \"drive:src\" for the source\n- dstFs - a remote name string e.g. \"drive:dst\" for the destination\n- createEmptySrcDirs - create empty src directories on destination if set\n\n\nSee the [sync](/commands/rclone_sync/) command for more information on the above.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "sync/sync",
+			"Title": "sync a directory from source remote to destination remote"
+		},
+		{
+			"AuthRequired": false,
+			"Help": "This forgets the paths in the directory cache causing them to be\nre-read from the remote when needed.\n\nIf no paths are passed in then it will forget all the paths in the\ndirectory cache.\n\n    rclone rc vfs/forget\n\nOtherwise pass files or dirs in as file=path or dir=path.  Any\nparameter key starting with file will forget that file and any\nstarting with dir will forget that dir, e.g.\n\n    rclone rc vfs/forget file=hello file2=goodbye dir=home/junk\n \nThis command takes an \"fs\" parameter. If this parameter is not\nsupplied and if there is only one VFS in use then that VFS will be\nused. If there is more than one VFS in use then the \"fs\" parameter\nmust be supplied.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "vfs/forget",
+			"Title": "Forget files or directories in the directory cache."
+		},
+		{
+			"AuthRequired": false,
+			"Help": "This lists the active VFSes.\n\nIt returns a list under the key \"vfses\" where the values are the VFS\nnames that could be passed to the other VFS commands in the \"fs\"\nparameter.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "vfs/list",
+			"Title": "List active VFSes."
+		},
+		{
+			"AuthRequired": false,
+			"Help": "Without any parameter given this returns the current status of the\npoll-interval setting.\n\nWhen the interval=duration parameter is set, the poll-interval value\nis updated and the polling function is notified.\nSetting interval=0 disables poll-interval.\n\n    rclone rc vfs/poll-interval interval=5m\n\nThe timeout=duration parameter can be used to specify a time to wait\nfor the current poll function to apply the new value.\nIf timeout is less or equal 0, which is the default, wait indefinitely.\n\nThe new poll-interval value will only be active when the timeout is\nnot reached.\n\nIf poll-interval is updated or disabled temporarily, some changes\nmight not get picked up by the polling function, depending on the\nused remote.\n \nThis command takes an \"fs\" parameter. If this parameter is not\nsupplied and if there is only one VFS in use then that VFS will be\nused. If there is more than one VFS in use then the \"fs\" parameter\nmust be supplied.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "vfs/poll-interval",
+			"Title": "Get the status or update the value of the poll-interval option."
+		},
+		{
+			"AuthRequired": false,
+			"Help": "This returns info about the upload queue for the selected VFS.\n\nThis is only useful if `--vfs-cache-mode` \u003e off. If you call it when\nthe `--vfs-cache-mode` is off, it will return an empty result.\n\n    {\n        \"queued\": // an array of files queued for upload\n        [\n            {\n                \"name\":      \"file\",   // string: name (full path) of the file,\n                \"id\":        123,      // integer: id of this item in the queue,\n                \"size\":      79,       // integer: size of the file in bytes\n                \"expiry\":    1.5       // float: time until file is eligible for transfer, lowest goes first\n                \"tries\":     1,        // integer: number of times we have tried to upload\n                \"delay\":     5.0,      // float: seconds between upload attempts\n                \"uploading\": false,    // boolean: true if item is being uploaded\n            },\n       ],\n    }\n\nThe `expiry` time is the time until the file is eligible for being\nuploaded in floating point seconds. This may go negative. As rclone\nonly transfers `--transfers` files at once, only the lowest\n`--transfers` expiry times will have `uploading` as `true`. So there\nmay be files with negative expiry times for which `uploading` is\n`false`.\n\n \nThis command takes an \"fs\" parameter. If this parameter is not\nsupplied and if there is only one VFS in use then that VFS will be\nused. If there is more than one VFS in use then the \"fs\" parameter\nmust be supplied.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "vfs/queue",
+			"Title": "Queue info for a VFS."
+		},
+		{
+			"AuthRequired": false,
+			"Help": "Use this to adjust the `expiry` time for an item in the upload queue.\nYou will need to read the `id` of the item using `vfs/queue` before\nusing this call.\n\nYou can then set `expiry` to a floating point number of seconds from\nnow when the item is eligible for upload. If you want the item to be\nuploaded as soon as possible then set it to a large negative number (eg\n-1000000000). If you want the upload of the item to be delayed\nfor a long time then set it to a large positive number.\n\nSetting the `expiry` of an item which has already has started uploading\nwill have no effect - the item will carry on being uploaded.\n\nThis will return an error if called with `--vfs-cache-mode` off or if\nthe `id` passed is not found.\n\nThis takes the following parameters\n\n- `fs` - select the VFS in use (optional)\n- `id` - a numeric ID as returned from `vfs/queue`\n- `expiry` - a new expiry time as floating point seconds\n- `relative` - if set, expiry is to be treated as relative to the current expiry (optional, boolean)\n\nThis returns an empty result on success, or an error.\n\n \nThis command takes an \"fs\" parameter. If this parameter is not\nsupplied and if there is only one VFS in use then that VFS will be\nused. If there is more than one VFS in use then the \"fs\" parameter\nmust be supplied.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "vfs/queue-set-expiry",
+			"Title": "Set the expiry time for an item queued for upload."
+		},
+		{
+			"AuthRequired": false,
+			"Help": "This reads the directories for the specified paths and freshens the\ndirectory cache.\n\nIf no paths are passed in then it will refresh the root directory.\n\n    rclone rc vfs/refresh\n\nOtherwise pass directories in as dir=path. Any parameter key\nstarting with dir will refresh that directory, e.g.\n\n    rclone rc vfs/refresh dir=home/junk dir2=data/misc\n\nIf the parameter recursive=true is given the whole directory tree\nwill get refreshed. This refresh will use --fast-list if enabled.\n \nThis command takes an \"fs\" parameter. If this parameter is not\nsupplied and if there is only one VFS in use then that VFS will be\nused. If there is more than one VFS in use then the \"fs\" parameter\nmust be supplied.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "vfs/refresh",
+			"Title": "Refresh the directory cache."
+		},
+		{
+			"AuthRequired": false,
+			"Help": "This returns stats for the selected VFS.\n\n    {\n        // Status of the disk cache - only present if --vfs-cache-mode \u003e off\n        \"diskCache\": {\n            \"bytesUsed\": 0,\n            \"erroredFiles\": 0,\n            \"files\": 0,\n            \"hashType\": 1,\n            \"outOfSpace\": false,\n            \"path\": \"/home/user/.cache/rclone/vfs/local/mnt/a\",\n            \"pathMeta\": \"/home/user/.cache/rclone/vfsMeta/local/mnt/a\",\n            \"uploadsInProgress\": 0,\n            \"uploadsQueued\": 0\n        },\n        \"fs\": \"/mnt/a\",\n        \"inUse\": 1,\n        // Status of the in memory metadata cache\n        \"metadataCache\": {\n            \"dirs\": 1,\n            \"files\": 0\n        },\n        // Options as returned by options/get\n        \"opt\": {\n            \"CacheMaxAge\": 3600000000000,\n            // ...\n            \"WriteWait\": 1000000000\n        }\n    }\n\n \nThis command takes an \"fs\" parameter. If this parameter is not\nsupplied and if there is only one VFS in use then that VFS will be\nused. If there is more than one VFS in use then the \"fs\" parameter\nmust be supplied.",
+			"NeedsRequest": false,
+			"NeedsResponse": false,
+			"Path": "vfs/stats",
+			"Title": "Stats for a VFS."
+		}
+	]
+}
