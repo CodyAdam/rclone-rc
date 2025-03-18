@@ -1,6 +1,6 @@
 {
   "name": "rclone-rc",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A fully typed TypeScript API client for Rclone RC",
   "homepage": "https://github.com/CodyAdam/rclone-rc",
   "repository": {
@@ -17,7 +17,6 @@
     "build": "tsc",
     "lint": "eslint src",
     "format": "prettier --write \"src/**/*.ts\"",
-    "prepublishOnly": "pnpm run clean && pnpm run lint && pnpm run build",
     "test": "vitest run",
     "test:watch": "vitest",
     "openapi": "tsx src/generate-openapi.ts"
