@@ -36,8 +36,3 @@ pnpm-debug.log*
 
 # TypeScript cache
 *.tsbuildinfo
-
-# Package files
-pnpm-lock.yaml
-package-lock.json
-yarn.lock 
