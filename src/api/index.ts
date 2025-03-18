@@ -3,98 +3,97 @@ import { z } from 'zod';
 
 const c = initContract();
 
-const paths = [
-  '/backend/command',
-  '/cache/expire',
-  '/cache/fetch',
-  '/cache/stats',
-  '/config/create',
-  '/config/delete',
-  '/config/dump',
-  '/config/get',
-  '/config/listremotes',
-  '/config/password',
-  '/config/paths',
-  '/config/providers',
-  '/config/setpath',
-  '/config/update',
-  '/core/bwlimit',
-  '/core/command',
-  '/core/du',
-  '/core/gc',
-  '/core/group-list',
-  '/core/memstats',
-  '/core/obscure',
-  '/core/pid',
-  '/core/quit',
-  '/core/stats', // DONE
-  '/core/stats-delete',
-  '/core/stats-reset',
-  '/core/transferred',
-  '/core/version', // DONE
-  '/debug/set-block-profile-rate',
-  '/debug/set-gc-percent',
-  '/debug/set-mutex-profile-fraction',
-  '/debug/set-soft-memory-limit',
-  '/fscache/clear',
-  '/fscache/entries',
-  '/job/list', // DONE
-  '/job/status', // DONE
-  '/job/stop', // DONE
-  '/job/stopgroup', // DONE
-  '/mount/listmounts',
-  '/mount/mount',
-  '/mount/types',
-  '/mount/unmount',
-  '/mount/unmountall',
-  '/operations/about', // DONE
-  '/operations/check',
-  '/operations/cleanup',
-  '/operations/copyfile',
-  '/operations/copyurl',
-  '/operations/delete',
-  '/operations/deletefile',
-  '/operations/fsinfo',
-  '/operations/hashsum',
-  '/operations/list', // DONE
-  '/operations/mkdir', // DONE
-  '/operations/movefile',
-  '/operations/publiclink',
-  '/operations/purge', // DONE
-  '/operations/rmdir', // DONE
-  '/operations/rmdirs',
-  '/operations/settier',
-  '/operations/settierfile',
-  '/operations/size',
-  '/operations/stat',
-  '/operations/uploadfile',
-  '/options/blocks',
-  '/options/get',
-  '/options/info',
-  '/options/local',
-  '/options/set',
-  '/pluginsctl/addPlugin',
-  '/pluginsctl/getPluginsForType',
-  '/pluginsctl/listPlugins',
-  '/pluginsctl/listTestPlugins',
-  '/pluginsctl/removePlugin',
-  '/pluginsctl/removeTestPlugin',
-  '/rc/error',
-  '/rc/list',
-  '/rc/noop', // DONE
-  '/rc/noopauth', // DONE
-  '/sync/bisync',
-  '/sync/copy',
-  '/sync/move',
-  '/sync/sync',
-  '/vfs/forget',
-  '/vfs/list',
-  '/vfs/poll-interval',
-  '/vfs/queue',
-  '/vfs/queue-set-expiry',
-  '/vfs/refresh',
-  '/vfs/stats',
-] as const;
+type Paths =
+  | '/backend/command'
+  | '/cache/expire'
+  | '/cache/fetch'
+  | '/cache/stats'
+  | '/config/create'
+  | '/config/delete'
+  | '/config/dump'
+  | '/config/get'
+  | '/config/listremotes'
+  | '/config/password'
+  | '/config/paths'
+  | '/config/providers'
+  | '/config/setpath'
+  | '/config/update'
+  | '/core/bwlimit'
+  | '/core/command'
+  | '/core/du'
+  | '/core/gc'
+  | '/core/group-list'
+  | '/core/memstats'
+  | '/core/obscure'
+  | '/core/pid'
+  | '/core/quit'
+  | '/core/stats' // DONE
+  | '/core/stats-delete'
+  | '/core/stats-reset'
+  | '/core/transferred'
+  | '/core/version' // DONE
+  | '/debug/set-block-profile-rate'
+  | '/debug/set-gc-percent'
+  | '/debug/set-mutex-profile-fraction'
+  | '/debug/set-soft-memory-limit'
+  | '/fscache/clear'
+  | '/fscache/entries'
+  | '/job/list' // DONE
+  | '/job/status' // DONE
+  | '/job/stop' // DONE
+  | '/job/stopgroup' // DONE
+  | '/mount/listmounts'
+  | '/mount/mount'
+  | '/mount/types'
+  | '/mount/unmount'
+  | '/mount/unmountall'
+  | '/operations/about' // DONE
+  | '/operations/check'
+  | '/operations/cleanup'
+  | '/operations/copyfile'
+  | '/operations/copyurl'
+  | '/operations/delete'
+  | '/operations/deletefile'
+  | '/operations/fsinfo'
+  | '/operations/hashsum'
+  | '/operations/list' // DONE
+  | '/operations/mkdir' // DONE
+  | '/operations/movefile'
+  | '/operations/publiclink'
+  | '/operations/purge' // DONE
+  | '/operations/rmdir' // DONE
+  | '/operations/rmdirs'
+  | '/operations/settier'
+  | '/operations/settierfile'
+  | '/operations/size'
+  | '/operations/stat'
+  | '/operations/uploadfile'
+  | '/options/blocks'
+  | '/options/get'
+  | '/options/info'
+  | '/options/local'
+  | '/options/set'
+  | '/pluginsctl/addPlugin'
+  | '/pluginsctl/getPluginsForType'
+  | '/pluginsctl/listPlugins'
+  | '/pluginsctl/listTestPlugins'
+  | '/pluginsctl/removePlugin'
+  | '/pluginsctl/removeTestPlugin'
+  | '/rc/error'
+  | '/rc/list'
+  | '/rc/noop' // DONE
+  | '/rc/noopauth' // DONE
+  | '/sync/bisync'
+  | '/sync/copy'
+  | '/sync/move'
+  | '/sync/sync'
+  | '/vfs/forget'
+  | '/vfs/list'
+  | '/vfs/poll-interval'
+  | '/vfs/queue'
+  | '/vfs/queue-set-expiry'
+  | '/vfs/refresh'
+  | '/vfs/stats';
 
 export const errorSchema = z.object({
   error: z.string().describe('Error message'),
@@ -147,7 +146,7 @@ const globalOptionsSchema = z.object({
 const spec = {
   noop: {
     method: 'POST',
-    path: '/rc/noop' satisfies (typeof paths)[number],
+    path: '/rc/noop' satisfies Paths,
     body: z.record(z.unknown()).optional(),
     responses: {
       200: z.record(z.unknown()).describe('input parameters echoed'),
@@ -156,7 +155,7 @@ const spec = {
   },
   noopauth: {
     method: 'POST',
-    path: '/rc/noopauth' satisfies (typeof paths)[number],
+    path: '/rc/noopauth' satisfies Paths,
     body: z.record(z.unknown()).optional(),
     responses: {
       200: z.record(z.unknown()).describe('input parameters echoed'),
@@ -165,7 +164,7 @@ const spec = {
   },
   version: {
     method: 'POST',
-    path: '/core/version' satisfies (typeof paths)[number],
+    path: '/core/version' satisfies Paths,
     body: globalOptionsSchema.optional(),
     responses: {
       200: z.object({
@@ -184,7 +183,7 @@ const spec = {
   },
   list: {
     method: 'POST',
-    path: '/operations/list' satisfies (typeof paths)[number],
+    path: '/operations/list' satisfies Paths,
     body: z
       .object({
         fs: z.string().describe('a remote name string e.g. "drive:"'),
@@ -219,7 +218,7 @@ const spec = {
   },
   about: {
     method: 'POST',
-    path: '/operations/about' satisfies (typeof paths)[number],
+    path: '/operations/about' satisfies Paths,
     body: z
       .object({
         fs: z.string().describe('a remote name string e.g. "drive:"'),
@@ -239,7 +238,7 @@ const spec = {
   },
   uploadFile: {
     method: 'POST',
-    path: '/operations/uploadfile' satisfies (typeof paths)[number],
+    path: '/operations/uploadfile' satisfies Paths,
     query: z
       .object({
         fs: z.string().describe('a remote name string e.g. "drive:"'),
@@ -255,7 +254,7 @@ const spec = {
   },
   stats: {
     method: 'POST',
-    path: '/core/stats' satisfies (typeof paths)[number],
+    path: '/core/stats' satisfies Paths,
     body: globalOptionsSchema.optional(),
     responses: {
       200: z.object({
@@ -286,7 +285,7 @@ const spec = {
   },
   purge: {
     method: 'POST',
-    path: '/operations/purge' satisfies (typeof paths)[number],
+    path: '/operations/purge' satisfies Paths,
     body: z
       .object({
         fs: z.string().describe('a remote name string e.g. "drive:"'),
@@ -300,7 +299,7 @@ const spec = {
   },
   mkdir: {
     method: 'POST',
-    path: '/operations/mkdir' satisfies (typeof paths)[number],
+    path: '/operations/mkdir' satisfies Paths,
     body: z
       .object({
         fs: z.string().describe('a remote name string e.g. "drive:"'),
@@ -314,7 +313,7 @@ const spec = {
   },
   rmdir: {
     method: 'POST',
-    path: '/operations/rmdir' satisfies (typeof paths)[number],
+    path: '/operations/rmdir' satisfies Paths,
     body: z
       .object({
         fs: z.string().describe('a remote name string e.g. "drive:"'),
@@ -329,7 +328,7 @@ const spec = {
 
   jobList: {
     method: 'POST',
-    path: '/job/list' satisfies (typeof paths)[number],
+    path: '/job/list' satisfies Paths,
     body: globalOptionsSchema.optional(),
     responses: {
       200: z.object({
@@ -343,7 +342,7 @@ const spec = {
   },
   jobStatus: {
     method: 'POST',
-    path: '/job/status' satisfies (typeof paths)[number],
+    path: '/job/status' satisfies Paths,
     body: z
       .object({
         jobid: z.number().describe('id of the job (integer)'),
@@ -372,7 +371,7 @@ const spec = {
   },
   jobStop: {
     method: 'POST',
-    path: '/job/stop' satisfies (typeof paths)[number],
+    path: '/job/stop' satisfies Paths,
     body: z
       .object({
         jobid: z.number().describe('id of the job (integer)'),
@@ -385,7 +384,7 @@ const spec = {
   },
   jobStopGroup: {
     method: 'POST',
-    path: '/job/stopgroup' satisfies (typeof paths)[number],
+    path: '/job/stopgroup' satisfies Paths,
     body: z
       .object({
         group: z.string().describe('name of the group (string)'),

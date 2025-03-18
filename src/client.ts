@@ -38,13 +38,13 @@ export interface RcloneRcOptions {
  *   username: 'admin',
  *   password: 'password',
  * });
- * 
+ *
  * // Perform a noop operation
  * const noop = await client.noop({ body: { param1: 'test', param2: 123 } });
- * 
+ *
  * // List files in a directory
  * const list = await client.list({ body: { fs: ':local:', remote: '' } });
- * 
+ *
  * // Upload a file
  * const formData = new FormData();
  * formData.append('file0', new File(['content'], 'test.txt', { type: 'text/plain' }));
@@ -55,7 +55,12 @@ export interface RcloneRcOptions {
  * ```
  */
 export function createClient(options: RcloneRcOptions = {}) {
-  const { baseUrl = 'http://localhost:5572', username, password, validateResponse = true } = options;
+  const {
+    baseUrl = 'http://localhost:5572',
+    username,
+    password,
+    validateResponse = true,
+  } = options;
 
   const client = initClient(rcloneContract, {
     baseUrl,
@@ -68,7 +73,7 @@ export function createClient(options: RcloneRcOptions = {}) {
 
 /**
  * Creates an async client for rclone RC that supports asynchronous operations
- * 
+ *
  * @example
  * ```ts
  * const asyncClient = createAsyncClient({
@@ -76,7 +81,7 @@ export function createClient(options: RcloneRcOptions = {}) {
  *   username: 'admin',
  *   password: 'password',
  * });
- * 
+ *
  * // Start a long-running job in the background
  * const job = await asyncClient.list({
  *   body: {
@@ -86,10 +91,10 @@ export function createClient(options: RcloneRcOptions = {}) {
  *     _async: true, // This flag makes the operation run asynchronously
  *   },
  * });
- * 
+ *
  * // Get the job ID from the response
  * const jobId = job.body.jobid;
- * 
+ *
  * // Check job status
  * const jobStatus = await client.jobStatus({
  *   body: { jobid: jobId },
@@ -97,7 +102,12 @@ export function createClient(options: RcloneRcOptions = {}) {
  * ```
  */
 export function createAsyncClient(options: RcloneRcOptions = {}) {
-  const { baseUrl = 'http://localhost:5572', username, password, validateResponse = true } = options;
+  const {
+    baseUrl = 'http://localhost:5572',
+    username,
+    password,
+    validateResponse = true,
+  } = options;
 
   const client = initClient(rcloneAsyncContract, {
     baseUrl,

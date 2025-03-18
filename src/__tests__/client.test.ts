@@ -214,15 +214,11 @@ describe('Rclone Client', () => {
       expect([200, 500]).toContain(stopGroupResult.status);
 
       // Wait for our original job to complete or be stopped
-      try {
-        // Check the status of our job
-        const jobStatus = await client.jobStatus({
-          body: { jobid: jobId },
-        });
-        expect([200, 500]).toContain(jobStatus.status);
-      } catch (error) {
-        // Job might have been stopped, which is expected
-      }
+      // Check the status of our job
+      const jobStatus = await client.jobStatus({
+        body: { jobid: jobId },
+      });
+      expect([200, 500]).toContain(jobStatus.status);
     },
   );
 });
