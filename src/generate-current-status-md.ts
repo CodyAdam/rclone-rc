@@ -43,14 +43,16 @@ const document = `
 
 # Current completed endpoints
 
-Percentage complete: ${((done / total) * 100).toFixed(2)}% (${done}/${total})
+Percentage complete: **${((done / total) * 100).toFixed(2)}%** (${done}/${total})
 
-| Endpoint | Implemented | Alias | Description |
-|----------|-------------|-------|-------------|
+*🔒: Requires authentication*
+
+| Endpoint | Done | Alias | Description |
+|----------|------|-------|-------------|
 ${commands
   .map(command => {
     const endpoint = getIfImplemented(command);
-    return `| ${command.Path} | ${endpoint ? '✅' : '❌'} | ${endpoint?.alias ? `\`api.${endpoint.alias}()\`` : ''} | ${command.Title} |`;
+    return `| ${command.Path} | ${endpoint ? '✅' : '❌'} | ${endpoint?.alias ? `\`api.${endpoint.alias}()\`` : ''} | ${command.AuthRequired ? '🔒 ' : ''}${command.Title} |`;
   })
   .join('\n')}
 `;
