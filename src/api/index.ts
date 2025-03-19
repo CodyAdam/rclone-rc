@@ -4,6 +4,9 @@ import { coreEndpoints } from './core';
 import { operationsEndpoints } from './operations';
 import { rcEndpoints } from './rc';
 import { AsyncContract, Router } from './shared';
+import { syncEndpoints } from './sync';
+import { optionsEndpoints } from './options';
+import { jobEndpoints } from './job';
 
 const c = initContract();
 
@@ -12,6 +15,9 @@ const spec = {
   ...rcEndpoints,
   ...coreEndpoints,
   ...operationsEndpoints,
+  ...syncEndpoints,
+  ...optionsEndpoints,
+  ...jobEndpoints,
 } satisfies Router;
 
 // Create the contract from the combined spec

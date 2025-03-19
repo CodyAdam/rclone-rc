@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { Paths, Router, errorSchema, globalOptionsSchema, itemSchema } from './shared';
+import { Paths, Router, errorSchema, globalOptionsSchema } from './shared';
 
 export const operationsEndpoints = {
   list: {
@@ -14,10 +14,7 @@ export const operationsEndpoints = {
             recurse: z.boolean().optional().describe('If set recurse directories'),
             noModTime: z.boolean().optional().describe('If set return modification time'),
             showEncrypted: z.boolean().optional().describe('If set show decrypted names'),
-            showOrigIDs: z
-              .boolean()
-              .optional()
-              .describe('If set show the IDs for each item if known'),
+            showOrigIDs: z.boolean().optional().describe('If set show the IDs for each item if known'),
             showHash: z.boolean().optional().describe('If set return a dictionary of hashes'),
             noMimeType: z.boolean().optional().describe("If set don't show mime types"),
             dirsOnly: z.boolean().optional().describe('If set only show directories'),
@@ -33,7 +30,26 @@ export const operationsEndpoints = {
       })
       .extend(globalOptionsSchema.shape),
     responses: {
-      200: z.object({ list: z.array(itemSchema) }),
+      200: z.object({
+        list: z.array(
+          z.object({
+            Path: z.string().optional().describe('Full path of the item'),
+            Name: z.string().optional().describe('Name of the item'),
+            Size: z.number().optional().describe('Size of the item in bytes'),
+            MimeType: z.string().optional().describe('MIME type of the item'),
+            ModTime: z.string().optional().describe('Modification time of the item'),
+            IsDir: z.boolean().optional().describe('Whether the item is a directory'),
+            Hashes: z.record(z.string()).optional().describe('Hashes of the item (SHA-1, MD5, DropboxHash, etc.)'),
+            ID: z.string().optional().describe('ID of the item'),
+            OrigID: z.string().optional().describe('Original ID of the item'),
+            IsBucket: z.boolean().optional().describe('Whether the item is a bucket'),
+            Tier: z.string().optional().describe('Storage tier of the item (e.g., "hot")'),
+            Encrypted: z.string().optional().describe('Encrypted name of the item'),
+            EncryptedPath: z.string().optional().describe('Encrypted path of the item'),
+            Metadata: z.record(z.unknown()).optional().describe('Additional metadata of the item'),
+          }),
+        ),
+      }),
       500: errorSchema,
     },
   },
@@ -108,24 +124,6 @@ export const operationsEndpoints = {
       .object({
         fs: z.string().describe('a remote name string e.g. "drive:"'),
         remote: z.string().describe('a path within that remote e.g. "dir"'),
-      })
-      .extend(globalOptionsSchema.shape),
-    responses: {
-      200: z.object({}),
-      500: errorSchema,
-    },
-  },
-  sync: {
-    method: 'POST',
-    path: '/sync/sync' satisfies Paths,
-    body: z
-      .object({
-        srcFs: z.string().describe('a remote name string e.g. "drive:src" for the source'),
-        dstFs: z.string().describe('a remote name string e.g. "drive:dst" for the destination'),
-        createEmptySrcDirs: z
-          .boolean()
-          .optional()
-          .describe('create empty src directories on destination if set'),
       })
       .extend(globalOptionsSchema.shape),
     responses: {

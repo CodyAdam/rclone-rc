@@ -13,7 +13,7 @@ describe('Basic Operations', () => {
     const testParams = { param1: 'test', param2: 123 };
     const noop = await client.noop({ body: testParams });
     expect(noop.status).toBe(200);
-    if (noop.status !== 200) return;
+    if (noop.status !== 200) expect.fail(`Response had an issue : ${JSON.stringify(noop)}`);
     expect(noop.body).toEqual(testParams);
   });
 
@@ -21,7 +21,7 @@ describe('Basic Operations', () => {
     const testParams = { param1: 'test', param2: 123 };
     const noopauth = await client.noopAuth({ body: testParams });
     expect(noopauth.status).toBe(200);
-    if (noopauth.status !== 200) return;
+    if (noopauth.status !== 200) expect.fail(`Response had an issue : ${JSON.stringify(noopauth)}`);
     expect(noopauth.body).toEqual(testParams);
   });
 

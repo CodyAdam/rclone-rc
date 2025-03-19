@@ -5,7 +5,7 @@ describe('Job Operations', () => {
   it('should list jobs', async () => {
     const jobList = await client.jobList({ body: undefined });
     expect(jobList.status).toBe(200);
-    if (jobList.status !== 200) return;
+    if (jobList.status !== 200) expect.fail(`Response had an issue : ${JSON.stringify(jobList)}`);
     expect(Array.isArray(jobList.body.jobids)).toBe(true);
   });
 
@@ -19,7 +19,7 @@ describe('Job Operations', () => {
     // Get job list to find our job
     const jobList = await client.jobList({ body: undefined });
     expect(jobList.status).toBe(200);
-    if (jobList.status !== 200) return;
+    if (jobList.status !== 200) expect.fail(`Response had an issue : ${JSON.stringify(jobList)}`);
 
     // If there are jobs, check the status of the first one
     if (jobList.body.jobids.length > 0) {
@@ -29,7 +29,7 @@ describe('Job Operations', () => {
       });
 
       expect(jobStatus.status).toBe(200);
-      if (jobStatus.status !== 200) return;
+      if (jobStatus.status !== 200) expect.fail(`Response had an issue : ${JSON.stringify(jobStatus)}`);
       await listOperation;
     }
   });
@@ -51,16 +51,13 @@ describe('Job Operations', () => {
         },
       });
       expect(job.status).toBe(200);
-      if (job.status !== 200) return;
+      if (job.status !== 200) expect.fail(`Response had an issue : ${JSON.stringify(job)}`);
       const jobId = job.body.jobid;
 
       // Get the job list
       const jobList = await client.jobList({ body: undefined });
       expect(jobList.status).toBe(200);
-      if (jobList.status !== 200) {
-        // Skip the test if we can't get job list
-        return;
-      }
+      if (jobList.status !== 200) expect.fail(`Response had an issue : ${JSON.stringify(jobList)}`);
 
       // Try to stop the job we created
       const stopResult = await client.jobStop({

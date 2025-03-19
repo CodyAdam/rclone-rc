@@ -2,7 +2,7 @@
 
 # Current completed endpoints
 
-Percentage complete: 17.24% (15/87)
+Percentage complete: 18.39% (16/87)
 
 | Endpoint | Implemented | Alias | Description |
 |----------|-------------|-------|-------------|
@@ -70,7 +70,7 @@ Percentage complete: 17.24% (15/87)
 | options/blocks | ❌ |  | List all the option blocks |
 | options/get | ❌ |  | Get all the global options |
 | options/info | ❌ |  | Get info about all the global options |
-| options/local | ❌ |  | Get the currently active config for this call |
+| options/local | ✅ | `api.optionsLocal()` | Get the currently active config for this call |
 | options/set | ❌ |  | Set an option |
 | pluginsctl/addPlugin | ❌ |  | Add a plugin using url |
 | pluginsctl/getPluginsForType | ❌ |  | Get plugins with type criteria |
@@ -81,7 +81,7 @@ Percentage complete: 17.24% (15/87)
 | rc/error | ❌ |  | This returns an error |
 | rc/list | ❌ |  | List all the registered remote control commands |
 | rc/noop | ✅ | `api.noop()` | Echo the input to the output parameters |
-| rc/noopauth | ✅ | `api.noopauth()` | Echo the input to the output parameters requiring auth |
+| rc/noopauth | ✅ | `api.noopAuth()` | Echo the input to the output parameters requiring auth |
 | sync/bisync | ❌ |  | Perform bidirectional synchronization between two paths. |
 | sync/copy | ❌ |  | copy a directory from source remote to destination remote |
 | sync/move | ❌ |  | move a directory from source remote to destination remote |

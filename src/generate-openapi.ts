@@ -13,8 +13,7 @@ const openApiDocument = generateOpenApi(rcloneContract, {
   info: {
     title: 'Rclone RC API',
     version: '0.1.0',
-    description:
-      "A fully type-safe TypeScript API client for Rclone's Remote Control (RC) interface",
+    description: "A fully type-safe TypeScript API client for Rclone's Remote Control (RC) interface",
     contact: {
       name: 'GitHub Repository',
       url: 'https://github.com/CodyAdam/rclone-rc',

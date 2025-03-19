@@ -19,9 +19,7 @@ type Command = z.infer<typeof commandSchema>;
 const commands = z.object({ commands: z.array(commandSchema) }).parse(commandsRaw).commands;
 
 function getIfImplemented(command: Command) {
-  const entry = Object.entries(rcloneContract).find(
-    ([_, endpoint]) => endpoint.path === `/${command.Path}`,
-  );
+  const entry = Object.entries(rcloneContract).find(([_, endpoint]) => endpoint.path === `/${command.Path}`);
 
   if (entry) {
     const [key, val] = entry;

@@ -55,12 +55,7 @@ export interface RcloneRcOptions {
  * ```
  */
 export function createClient(options: RcloneRcOptions = {}) {
-  const {
-    baseUrl = 'http://localhost:5572',
-    username,
-    password,
-    validateResponse = true,
-  } = options;
+  const { baseUrl = 'http://localhost:5572', username, password, validateResponse = true } = options;
 
   const client = initClient(rcloneContract, {
     baseUrl,
@@ -102,12 +97,7 @@ export function createClient(options: RcloneRcOptions = {}) {
  * ```
  */
 export function createAsyncClient(options: RcloneRcOptions = {}) {
-  const {
-    baseUrl = 'http://localhost:5572',
-    username,
-    password,
-    validateResponse = true,
-  } = options;
+  const { baseUrl = 'http://localhost:5572', username, password, validateResponse = true } = options;
 
   const client = initClient(rcloneAsyncContract, {
     baseUrl,
