@@ -1,9 +1,11 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { client, purgeMemoryFs } from './test-setup';
 
+const dir = 'rclone-rc-test';
+
 describe('Filesystem Operations', () => {
   beforeEach(async () => {
-    await purgeMemoryFs();
+    await purgeMemoryFs(dir);
   });
 
   it('should list current directory', async () => {
@@ -24,23 +26,25 @@ describe('Filesystem Operations', () => {
     );
     const upload = await client.uploadFile({
       body: formData,
-      query: { fs: ':memory:', remote: '' },
+      query: { fs: ':memory:', remote: dir },
     });
     if (upload.status !== 200) expect.fail(`Response had an issue : ${JSON.stringify(upload)}`);
 
-    const list = await client.list({ body: { fs: ':memory:', remote: '' } });
+    const list = await client.list({ body: { fs: ':memory:', remote: dir } });
     if (list.status !== 200) expect.fail(`Response had an issue : ${JSON.stringify(list)}`);
     expect(list.body.list.some(item => item.Name === testFileName)).toBe(true);
   });
 
   it('should purge', async () => {
-    const purged = await client.purge({ body: { fs: ':memory:', remote: '' } });
-    expect(purged.status).toBe(200);
-    expect(purged).toBeDefined();
+    const makeDir = await client.mkdir({ body: { fs: ':memory:', remote: dir } });
+    if (makeDir.status !== 200) expect.fail(`Response had an issue : ${JSON.stringify(makeDir)}`);
+    const makeSubDir = await client.mkdir({ body: { fs: ':memory:', remote: `${dir}/subdir` } });
+    if (makeSubDir.status !== 200) expect.fail(`Response had an issue : ${JSON.stringify(makeSubDir)}`);
+    const purged = await client.purge({ body: { fs: ':memory:', remote: dir } });
+    if (purged.status !== 200) expect.fail(`Response had an issue : ${JSON.stringify(purged)}`);
   });
 
   it('should create and remove directories', async () => {
-    const dir = 'rclone-rc-test';
     const subdir = 'subrclone-rc-test';
     // Create parent directory
     const createParentDir = await client.mkdir({ body: { fs: ':local:', remote: dir } });
@@ -48,9 +52,11 @@ describe('Filesystem Operations', () => {
 
     // Verify parent directory exists
     const listRoot = await client.list({ body: { fs: ':local:', remote: '' } });
-    expect(listRoot.status).toBe(200);
     if (listRoot.status !== 200) expect.fail(`Response had an issue : ${JSON.stringify(listRoot)}`);
-    expect(listRoot.body.list.some(item => item.Path === dir)).toBe(true);
+    expect(
+      listRoot.body.list.some(item => item.Path === dir),
+      `Expected ${dir} to exist got ${JSON.stringify(listRoot.body.list)}`,
+    ).toBe(true);
 
     // Create subdirectory
     const createSubDir = await client.mkdir({

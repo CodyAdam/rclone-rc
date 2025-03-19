@@ -17,8 +17,8 @@
     "build": "tsc",
     "lint": "eslint src",
     "format": "prettier --write \"src/**/*.ts\"",
-    "test": "vitest run --no-file-parallelism",
-    "test:watch": "vitest --no-file-parallelism",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "openapi": "tsx src/generate-openapi.ts",
     "status": "tsx src/generate-current-status-md.ts",
     "preCommit": "pnpm run lint && pnpm run format && pnpm run test && pnpm run openapi && pnpm run status"

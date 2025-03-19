@@ -6,7 +6,8 @@ const sourceFolder = 'source-folder';
 const destFolder = 'dest-folder';
 describe('Sync Operations', () => {
   beforeEach(async () => {
-    await purgeMemoryFs();
+    await purgeMemoryFs(sourceFolder);
+    await purgeMemoryFs(destFolder);
 
     // Create source folder in memory filesystem
     await client.mkdir({
@@ -66,9 +67,9 @@ describe('Sync Operations', () => {
     expect(dryRunSync.status).toBe(200);
 
     // Verify files were not actually synced to destination folder (dry run)
-    const folderListAfterDryRun = await client.list({ body: { fs: ':memory:', remote: destFolder } });
+    const folderListAfterDryRun = await client.list({ body: { fs: ':memory:', remote: '' } });
     if (folderListAfterDryRun.status !== 200)
       expect.fail(`Response had an issue : ${JSON.stringify(folderListAfterDryRun.body)}`);
-    expect(folderListAfterDryRun.body.list.length).toBe(0);
+    expect(folderListAfterDryRun.body.list.some(item => item.Path === destFolder)).toBe(false);
   });
 });
