@@ -2,6 +2,8 @@
 
 A fully type-safe TypeScript API client for [Rclone's Remote Control](https://rclone.org/rc/) (RC) interface, powered by [@ts-rest](https://github.com/ts-rest/ts-rest) and [Zod](https://github.com/colinhacks/zod).
 
+*Tested with **Rclone v1.70.0***
+
 ## ⚠️ Work in Progress
 
 This library is currently under active development. Check out the [current status](current-status.md) for a list of implemented commands.
