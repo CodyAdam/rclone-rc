@@ -2,7 +2,7 @@
 
 # Current completed endpoints
 
-Percentage complete: 18.39% (16/87)
+Percentage complete: 22.99% (20/87)
 
 | Endpoint | Implemented | Alias | Description |
 |----------|-------------|-------|-------------|
@@ -47,7 +47,7 @@ Percentage complete: 18.39% (16/87)
 | mount/unmount | ❌ |  | Unmount selected active mount |
 | mount/unmountall | ❌ |  | Unmount all active mounts |
 | operations/about | ✅ | `api.about()` | Return the space used on the remote |
-| operations/check | ❌ |  | check the source and destination are the same |
+| operations/check | ✅ | `api.check()` | check the source and destination are the same |
 | operations/cleanup | ❌ |  | Remove trashed files in the remote or path |
 | operations/copyfile | ❌ |  | Copy a file from source remote to destination remote |
 | operations/copyurl | ❌ |  | Copy the URL to the object |
@@ -82,9 +82,9 @@ Percentage complete: 18.39% (16/87)
 | rc/list | ❌ |  | List all the registered remote control commands |
 | rc/noop | ✅ | `api.noop()` | Echo the input to the output parameters |
 | rc/noopauth | ✅ | `api.noopAuth()` | Echo the input to the output parameters requiring auth |
-| sync/bisync | ❌ |  | Perform bidirectional synchronization between two paths. |
-| sync/copy | ❌ |  | copy a directory from source remote to destination remote |
-| sync/move | ❌ |  | move a directory from source remote to destination remote |
+| sync/bisync | ✅ | `api.bisync()` | Perform bidirectional synchronization between two paths. |
+| sync/copy | ✅ | `api.copy()` | copy a directory from source remote to destination remote |
+| sync/move | ✅ | `api.move()` | move a directory from source remote to destination remote |
 | sync/sync | ✅ | `api.sync()` | sync a directory from source remote to destination remote |
 | vfs/forget | ❌ |  | Forget files or directories in the directory cache. |
 | vfs/list | ❌ |  | List active VFSes. |

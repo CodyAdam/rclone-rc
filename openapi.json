@@ -7388,6 +7388,687 @@
         }
       }
     },
+    "/operations/check": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "srcFs": {
+                    "type": "string",
+                    "description": "a remote name string e.g. \"drive:\" for the source, \"/\" for local filesystem"
+                  },
+                  "dstFs": {
+                    "type": "string",
+                    "description": "a remote name string e.g. \"drive2:\" for the destination, \"/\" for local filesystem"
+                  },
+                  "download": {
+                    "type": "boolean",
+                    "description": "check by downloading rather than with hash"
+                  },
+                  "checkFileHash": {
+                    "type": "string",
+                    "description": "treat checkFileFs:checkFileRemote as a SUM file with hashes of given type"
+                  },
+                  "checkFileFs": {
+                    "type": "string",
+                    "description": "treat checkFileFs:checkFileRemote as a SUM file with hashes of given type"
+                  },
+                  "checkFileRemote": {
+                    "type": "string",
+                    "description": "treat checkFileFs:checkFileRemote as a SUM file with hashes of given type"
+                  },
+                  "oneWay": {
+                    "type": "boolean",
+                    "description": "check one way only, source files must exist on remote"
+                  },
+                  "combined": {
+                    "type": "boolean",
+                    "description": "make a combined report of changes (default false)"
+                  },
+                  "missingOnSrc": {
+                    "type": "boolean",
+                    "description": "report all files missing from the source (default true)"
+                  },
+                  "missingOnDst": {
+                    "type": "boolean",
+                    "description": "report all files missing from the destination (default true)"
+                  },
+                  "match": {
+                    "type": "boolean",
+                    "description": "report all matching files (default false)"
+                  },
+                  "differ": {
+                    "type": "boolean",
+                    "description": "report all non-matching files (default true)"
+                  },
+                  "error": {
+                    "type": "boolean",
+                    "description": "report all files with errors (hashing or reading) (default true)"
+                  },
+                  "_async": {
+                    "type": "boolean",
+                    "description": "If set run asynchronously, which means the command will return a job id and then return"
+                  },
+                  "_config": {
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "AskPassword": {
+                            "type": "boolean"
+                          },
+                          "AutoConfirm": {
+                            "type": "boolean"
+                          },
+                          "BackupDir": {
+                            "type": "string"
+                          },
+                          "BindAddr": {
+                            "type": "string"
+                          },
+                          "BufferSize": {
+                            "type": "number"
+                          },
+                          "BwLimit": {
+                            "type": "string"
+                          },
+                          "BwLimitFile": {
+                            "type": "string"
+                          },
+                          "CaCert": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "CheckFirst": {
+                            "type": "boolean"
+                          },
+                          "CheckSum": {
+                            "type": "boolean"
+                          },
+                          "Checkers": {
+                            "type": "number"
+                          },
+                          "ClientCert": {
+                            "type": "string"
+                          },
+                          "ClientKey": {
+                            "type": "string"
+                          },
+                          "CompareDest": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "ConnectTimeout": {
+                            "type": "number"
+                          },
+                          "Cookie": {
+                            "type": "boolean"
+                          },
+                          "CopyDest": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "CutoffMode": {
+                            "type": "string"
+                          },
+                          "DataRateUnit": {
+                            "type": "string"
+                          },
+                          "DefaultTime": {
+                            "type": "string"
+                          },
+                          "DeleteMode": {
+                            "type": "number"
+                          },
+                          "DisableFeatures": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "DisableHTTP2": {
+                            "type": "boolean"
+                          },
+                          "DisableHTTPKeepAlives": {
+                            "type": "boolean"
+                          },
+                          "DownloadHeaders": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "DryRun": {
+                            "type": "boolean"
+                          },
+                          "Dump": {
+                            "type": "string"
+                          },
+                          "ErrorOnNoTransfer": {
+                            "type": "boolean"
+                          },
+                          "ExpectContinueTimeout": {
+                            "type": "number"
+                          },
+                          "FixCase": {
+                            "type": "boolean"
+                          },
+                          "FsCacheExpireDuration": {
+                            "type": "number"
+                          },
+                          "FsCacheExpireInterval": {
+                            "type": "number"
+                          },
+                          "Headers": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "HumanReadable": {
+                            "type": "boolean"
+                          },
+                          "IgnoreCaseSync": {
+                            "type": "boolean"
+                          },
+                          "IgnoreChecksum": {
+                            "type": "boolean"
+                          },
+                          "IgnoreErrors": {
+                            "type": "boolean"
+                          },
+                          "IgnoreExisting": {
+                            "type": "boolean"
+                          },
+                          "IgnoreSize": {
+                            "type": "boolean"
+                          },
+                          "IgnoreTimes": {
+                            "type": "boolean"
+                          },
+                          "Immutable": {
+                            "type": "boolean"
+                          },
+                          "Inplace": {
+                            "type": "boolean"
+                          },
+                          "InsecureSkipVerify": {
+                            "type": "boolean"
+                          },
+                          "Interactive": {
+                            "type": "boolean"
+                          },
+                          "KvLockTime": {
+                            "type": "number"
+                          },
+                          "Links": {
+                            "type": "boolean"
+                          },
+                          "LogLevel": {
+                            "type": "string"
+                          },
+                          "LowLevelRetries": {
+                            "type": "number"
+                          },
+                          "MaxBacklog": {
+                            "type": "number"
+                          },
+                          "MaxBufferMemory": {
+                            "type": "number"
+                          },
+                          "MaxDelete": {
+                            "type": "number"
+                          },
+                          "MaxDeleteSize": {
+                            "type": "number"
+                          },
+                          "MaxDepth": {
+                            "type": "number"
+                          },
+                          "MaxDuration": {
+                            "type": "number"
+                          },
+                          "MaxStatsGroups": {
+                            "type": "number"
+                          },
+                          "MaxTransfer": {
+                            "type": "number"
+                          },
+                          "Metadata": {
+                            "type": "boolean"
+                          },
+                          "MetadataMapper": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "MetadataSet": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "ModifyWindow": {
+                            "type": "number"
+                          },
+                          "MultiThreadChunkSize": {
+                            "type": "number"
+                          },
+                          "MultiThreadCutoff": {
+                            "type": "number"
+                          },
+                          "MultiThreadSet": {
+                            "type": "boolean"
+                          },
+                          "MultiThreadStreams": {
+                            "type": "number"
+                          },
+                          "MultiThreadWriteBufferSize": {
+                            "type": "number"
+                          },
+                          "NoCheckDest": {
+                            "type": "boolean"
+                          },
+                          "NoConsole": {
+                            "type": "boolean"
+                          },
+                          "NoGzip": {
+                            "type": "boolean"
+                          },
+                          "NoTraverse": {
+                            "type": "boolean"
+                          },
+                          "NoUnicodeNormalization": {
+                            "type": "boolean"
+                          },
+                          "NoUpdateDirModTime": {
+                            "type": "boolean"
+                          },
+                          "NoUpdateModTime": {
+                            "type": "boolean"
+                          },
+                          "OrderBy": {
+                            "type": "string"
+                          },
+                          "PartialSuffix": {
+                            "type": "string"
+                          },
+                          "PasswordCommand": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "Progress": {
+                            "type": "boolean"
+                          },
+                          "ProgressTerminalTitle": {
+                            "type": "boolean"
+                          },
+                          "RefreshTimes": {
+                            "type": "boolean"
+                          },
+                          "Retries": {
+                            "type": "number"
+                          },
+                          "RetriesInterval": {
+                            "type": "number"
+                          },
+                          "ServerSideAcrossConfigs": {
+                            "type": "boolean"
+                          },
+                          "SizeOnly": {
+                            "type": "boolean"
+                          },
+                          "StatsFileNameLength": {
+                            "type": "number"
+                          },
+                          "StatsLogLevel": {
+                            "type": "string"
+                          },
+                          "StatsOneLine": {
+                            "type": "boolean"
+                          },
+                          "StatsOneLineDate": {
+                            "type": "boolean"
+                          },
+                          "StatsOneLineDateFormat": {
+                            "type": "string"
+                          },
+                          "StreamingUploadCutoff": {
+                            "type": "number"
+                          },
+                          "Suffix": {
+                            "type": "string"
+                          },
+                          "SuffixKeepExtension": {
+                            "type": "boolean"
+                          },
+                          "TPSLimit": {
+                            "type": "number"
+                          },
+                          "TPSLimitBurst": {
+                            "type": "number"
+                          },
+                          "TerminalColorMode": {
+                            "type": "string"
+                          },
+                          "Timeout": {
+                            "type": "number"
+                          },
+                          "TrackRenames": {
+                            "type": "boolean"
+                          },
+                          "TrackRenamesStrategy": {
+                            "type": "string"
+                          },
+                          "TrafficClass": {
+                            "type": "number"
+                          },
+                          "Transfers": {
+                            "type": "number"
+                          },
+                          "UpdateOlder": {
+                            "type": "boolean"
+                          },
+                          "UploadHeaders": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "UseJSONLog": {
+                            "type": "boolean"
+                          },
+                          "UseListR": {
+                            "type": "boolean"
+                          },
+                          "UseMmap": {
+                            "type": "boolean"
+                          },
+                          "UseServerModTime": {
+                            "type": "boolean"
+                          },
+                          "UserAgent": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": {
+                          "nullable": true
+                        }
+                      }
+                    ],
+                    "description": "A dictionary of config parameters to control the command execution"
+                  },
+                  "_filter": {
+                    "type": "object",
+                    "properties": {
+                      "DeleteExcluded": {
+                        "type": "boolean",
+                        "description": "Delete files that are excluded from the sync"
+                      },
+                      "ExcludeFile": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read exclude patterns from file"
+                      },
+                      "ExcludeFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read exclude patterns from file"
+                      },
+                      "ExcludeRule": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Exclude files matching pattern"
+                      },
+                      "FilesFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read list of source-file names from file"
+                      },
+                      "FilesFromRaw": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read list of source-file names from file without any processing of lines"
+                      },
+                      "FilterFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read filtering patterns from a file"
+                      },
+                      "FilterRule": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Add a file-filtering rule"
+                      },
+                      "HashFilter": {
+                        "type": "string",
+                        "description": "Filter by hash type and value"
+                      },
+                      "IgnoreCase": {
+                        "type": "boolean",
+                        "description": "Ignore case when pattern matching"
+                      },
+                      "IncludeFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read include patterns from file"
+                      },
+                      "IncludeRule": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Include files matching pattern"
+                      },
+                      "MaxAge": {
+                        "type": "number",
+                        "description": "Only transfer files younger than this in seconds"
+                      },
+                      "MaxSize": {
+                        "type": "number",
+                        "description": "Only transfer files smaller than this in bytes"
+                      },
+                      "MetadataExclude": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Exclude metadatas matching pattern"
+                      },
+                      "MetadataExcludeFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read metadata exclude patterns from file (use - to read from stdin)"
+                      },
+                      "MetadataFilter": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Add a metadata filtering rule"
+                      },
+                      "MetadataFilterFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read metadata filtering patterns from a file (use - to read from stdin)"
+                      },
+                      "MetadataInclude": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Include metadatas matching pattern"
+                      },
+                      "MetadataIncludeFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read metadata include patterns from file (use - to read from stdin)"
+                      },
+                      "MinAge": {
+                        "type": "number",
+                        "description": "Only transfer files older than this in seconds"
+                      },
+                      "MinSize": {
+                        "type": "number",
+                        "description": "Only transfer files bigger than this in bytes"
+                      }
+                    },
+                    "description": "A dictionary of filter parameters to apply for this command only"
+                  },
+                  "_group": {
+                    "type": "string",
+                    "description": "Group name for this command to track stats under a custom name"
+                  }
+                },
+                "required": [
+                  "srcFs",
+                  "dstFs"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "true if no error, false otherwise"
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "textual summary of check, OK or text string"
+                    },
+                    "hashType": {
+                      "type": "string",
+                      "description": "hash used in check, may be missing"
+                    },
+                    "combined": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "array of strings of combined report of changes"
+                    },
+                    "missingOnSrc": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "array of strings of all files missing from the source"
+                    },
+                    "missingOnDst": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "array of strings of all files missing from the destination"
+                    },
+                    "match": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "array of strings of all matching files"
+                    },
+                    "differ": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "array of strings of all non-matching files"
+                    },
+                    "error": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "array of strings of all files with errors (hashing or reading)"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "status"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "input": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      },
+                      "description": "Input parameters that caused the error"
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "API path that was called"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP status code"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/sync/sync": {
       "post": {
         "tags": [],
@@ -7916,6 +8597,1816 @@
                 "required": [
                   "srcFs",
                   "dstFs"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "input": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      },
+                      "description": "Input parameters that caused the error"
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "API path that was called"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP status code"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sync/copy": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "srcFs": {
+                    "type": "string",
+                    "description": "a remote name string e.g. \"drive:src\" for the source"
+                  },
+                  "dstFs": {
+                    "type": "string",
+                    "description": "a remote name string e.g. \"drive:dst\" for the destination"
+                  },
+                  "createEmptySrcDirs": {
+                    "type": "boolean",
+                    "description": "create empty src directories on destination if set"
+                  },
+                  "_async": {
+                    "type": "boolean",
+                    "description": "If set run asynchronously, which means the command will return a job id and then return"
+                  },
+                  "_config": {
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "AskPassword": {
+                            "type": "boolean"
+                          },
+                          "AutoConfirm": {
+                            "type": "boolean"
+                          },
+                          "BackupDir": {
+                            "type": "string"
+                          },
+                          "BindAddr": {
+                            "type": "string"
+                          },
+                          "BufferSize": {
+                            "type": "number"
+                          },
+                          "BwLimit": {
+                            "type": "string"
+                          },
+                          "BwLimitFile": {
+                            "type": "string"
+                          },
+                          "CaCert": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "CheckFirst": {
+                            "type": "boolean"
+                          },
+                          "CheckSum": {
+                            "type": "boolean"
+                          },
+                          "Checkers": {
+                            "type": "number"
+                          },
+                          "ClientCert": {
+                            "type": "string"
+                          },
+                          "ClientKey": {
+                            "type": "string"
+                          },
+                          "CompareDest": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "ConnectTimeout": {
+                            "type": "number"
+                          },
+                          "Cookie": {
+                            "type": "boolean"
+                          },
+                          "CopyDest": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "CutoffMode": {
+                            "type": "string"
+                          },
+                          "DataRateUnit": {
+                            "type": "string"
+                          },
+                          "DefaultTime": {
+                            "type": "string"
+                          },
+                          "DeleteMode": {
+                            "type": "number"
+                          },
+                          "DisableFeatures": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "DisableHTTP2": {
+                            "type": "boolean"
+                          },
+                          "DisableHTTPKeepAlives": {
+                            "type": "boolean"
+                          },
+                          "DownloadHeaders": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "DryRun": {
+                            "type": "boolean"
+                          },
+                          "Dump": {
+                            "type": "string"
+                          },
+                          "ErrorOnNoTransfer": {
+                            "type": "boolean"
+                          },
+                          "ExpectContinueTimeout": {
+                            "type": "number"
+                          },
+                          "FixCase": {
+                            "type": "boolean"
+                          },
+                          "FsCacheExpireDuration": {
+                            "type": "number"
+                          },
+                          "FsCacheExpireInterval": {
+                            "type": "number"
+                          },
+                          "Headers": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "HumanReadable": {
+                            "type": "boolean"
+                          },
+                          "IgnoreCaseSync": {
+                            "type": "boolean"
+                          },
+                          "IgnoreChecksum": {
+                            "type": "boolean"
+                          },
+                          "IgnoreErrors": {
+                            "type": "boolean"
+                          },
+                          "IgnoreExisting": {
+                            "type": "boolean"
+                          },
+                          "IgnoreSize": {
+                            "type": "boolean"
+                          },
+                          "IgnoreTimes": {
+                            "type": "boolean"
+                          },
+                          "Immutable": {
+                            "type": "boolean"
+                          },
+                          "Inplace": {
+                            "type": "boolean"
+                          },
+                          "InsecureSkipVerify": {
+                            "type": "boolean"
+                          },
+                          "Interactive": {
+                            "type": "boolean"
+                          },
+                          "KvLockTime": {
+                            "type": "number"
+                          },
+                          "Links": {
+                            "type": "boolean"
+                          },
+                          "LogLevel": {
+                            "type": "string"
+                          },
+                          "LowLevelRetries": {
+                            "type": "number"
+                          },
+                          "MaxBacklog": {
+                            "type": "number"
+                          },
+                          "MaxBufferMemory": {
+                            "type": "number"
+                          },
+                          "MaxDelete": {
+                            "type": "number"
+                          },
+                          "MaxDeleteSize": {
+                            "type": "number"
+                          },
+                          "MaxDepth": {
+                            "type": "number"
+                          },
+                          "MaxDuration": {
+                            "type": "number"
+                          },
+                          "MaxStatsGroups": {
+                            "type": "number"
+                          },
+                          "MaxTransfer": {
+                            "type": "number"
+                          },
+                          "Metadata": {
+                            "type": "boolean"
+                          },
+                          "MetadataMapper": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "MetadataSet": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "ModifyWindow": {
+                            "type": "number"
+                          },
+                          "MultiThreadChunkSize": {
+                            "type": "number"
+                          },
+                          "MultiThreadCutoff": {
+                            "type": "number"
+                          },
+                          "MultiThreadSet": {
+                            "type": "boolean"
+                          },
+                          "MultiThreadStreams": {
+                            "type": "number"
+                          },
+                          "MultiThreadWriteBufferSize": {
+                            "type": "number"
+                          },
+                          "NoCheckDest": {
+                            "type": "boolean"
+                          },
+                          "NoConsole": {
+                            "type": "boolean"
+                          },
+                          "NoGzip": {
+                            "type": "boolean"
+                          },
+                          "NoTraverse": {
+                            "type": "boolean"
+                          },
+                          "NoUnicodeNormalization": {
+                            "type": "boolean"
+                          },
+                          "NoUpdateDirModTime": {
+                            "type": "boolean"
+                          },
+                          "NoUpdateModTime": {
+                            "type": "boolean"
+                          },
+                          "OrderBy": {
+                            "type": "string"
+                          },
+                          "PartialSuffix": {
+                            "type": "string"
+                          },
+                          "PasswordCommand": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "Progress": {
+                            "type": "boolean"
+                          },
+                          "ProgressTerminalTitle": {
+                            "type": "boolean"
+                          },
+                          "RefreshTimes": {
+                            "type": "boolean"
+                          },
+                          "Retries": {
+                            "type": "number"
+                          },
+                          "RetriesInterval": {
+                            "type": "number"
+                          },
+                          "ServerSideAcrossConfigs": {
+                            "type": "boolean"
+                          },
+                          "SizeOnly": {
+                            "type": "boolean"
+                          },
+                          "StatsFileNameLength": {
+                            "type": "number"
+                          },
+                          "StatsLogLevel": {
+                            "type": "string"
+                          },
+                          "StatsOneLine": {
+                            "type": "boolean"
+                          },
+                          "StatsOneLineDate": {
+                            "type": "boolean"
+                          },
+                          "StatsOneLineDateFormat": {
+                            "type": "string"
+                          },
+                          "StreamingUploadCutoff": {
+                            "type": "number"
+                          },
+                          "Suffix": {
+                            "type": "string"
+                          },
+                          "SuffixKeepExtension": {
+                            "type": "boolean"
+                          },
+                          "TPSLimit": {
+                            "type": "number"
+                          },
+                          "TPSLimitBurst": {
+                            "type": "number"
+                          },
+                          "TerminalColorMode": {
+                            "type": "string"
+                          },
+                          "Timeout": {
+                            "type": "number"
+                          },
+                          "TrackRenames": {
+                            "type": "boolean"
+                          },
+                          "TrackRenamesStrategy": {
+                            "type": "string"
+                          },
+                          "TrafficClass": {
+                            "type": "number"
+                          },
+                          "Transfers": {
+                            "type": "number"
+                          },
+                          "UpdateOlder": {
+                            "type": "boolean"
+                          },
+                          "UploadHeaders": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "UseJSONLog": {
+                            "type": "boolean"
+                          },
+                          "UseListR": {
+                            "type": "boolean"
+                          },
+                          "UseMmap": {
+                            "type": "boolean"
+                          },
+                          "UseServerModTime": {
+                            "type": "boolean"
+                          },
+                          "UserAgent": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": {
+                          "nullable": true
+                        }
+                      }
+                    ],
+                    "description": "A dictionary of config parameters to control the command execution"
+                  },
+                  "_filter": {
+                    "type": "object",
+                    "properties": {
+                      "DeleteExcluded": {
+                        "type": "boolean",
+                        "description": "Delete files that are excluded from the sync"
+                      },
+                      "ExcludeFile": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read exclude patterns from file"
+                      },
+                      "ExcludeFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read exclude patterns from file"
+                      },
+                      "ExcludeRule": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Exclude files matching pattern"
+                      },
+                      "FilesFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read list of source-file names from file"
+                      },
+                      "FilesFromRaw": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read list of source-file names from file without any processing of lines"
+                      },
+                      "FilterFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read filtering patterns from a file"
+                      },
+                      "FilterRule": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Add a file-filtering rule"
+                      },
+                      "HashFilter": {
+                        "type": "string",
+                        "description": "Filter by hash type and value"
+                      },
+                      "IgnoreCase": {
+                        "type": "boolean",
+                        "description": "Ignore case when pattern matching"
+                      },
+                      "IncludeFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read include patterns from file"
+                      },
+                      "IncludeRule": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Include files matching pattern"
+                      },
+                      "MaxAge": {
+                        "type": "number",
+                        "description": "Only transfer files younger than this in seconds"
+                      },
+                      "MaxSize": {
+                        "type": "number",
+                        "description": "Only transfer files smaller than this in bytes"
+                      },
+                      "MetadataExclude": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Exclude metadatas matching pattern"
+                      },
+                      "MetadataExcludeFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read metadata exclude patterns from file (use - to read from stdin)"
+                      },
+                      "MetadataFilter": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Add a metadata filtering rule"
+                      },
+                      "MetadataFilterFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read metadata filtering patterns from a file (use - to read from stdin)"
+                      },
+                      "MetadataInclude": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Include metadatas matching pattern"
+                      },
+                      "MetadataIncludeFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read metadata include patterns from file (use - to read from stdin)"
+                      },
+                      "MinAge": {
+                        "type": "number",
+                        "description": "Only transfer files older than this in seconds"
+                      },
+                      "MinSize": {
+                        "type": "number",
+                        "description": "Only transfer files bigger than this in bytes"
+                      }
+                    },
+                    "description": "A dictionary of filter parameters to apply for this command only"
+                  },
+                  "_group": {
+                    "type": "string",
+                    "description": "Group name for this command to track stats under a custom name"
+                  }
+                },
+                "required": [
+                  "srcFs",
+                  "dstFs"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "input": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      },
+                      "description": "Input parameters that caused the error"
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "API path that was called"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP status code"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sync/move": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "srcFs": {
+                    "type": "string",
+                    "description": "a remote name string e.g. \"drive:src\" for the source"
+                  },
+                  "dstFs": {
+                    "type": "string",
+                    "description": "a remote name string e.g. \"drive:dst\" for the destination"
+                  },
+                  "createEmptySrcDirs": {
+                    "type": "boolean",
+                    "description": "create empty src directories on destination if set"
+                  },
+                  "deleteEmptySrcDirs": {
+                    "type": "boolean",
+                    "description": "delete empty src directories if set"
+                  },
+                  "_async": {
+                    "type": "boolean",
+                    "description": "If set run asynchronously, which means the command will return a job id and then return"
+                  },
+                  "_config": {
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "AskPassword": {
+                            "type": "boolean"
+                          },
+                          "AutoConfirm": {
+                            "type": "boolean"
+                          },
+                          "BackupDir": {
+                            "type": "string"
+                          },
+                          "BindAddr": {
+                            "type": "string"
+                          },
+                          "BufferSize": {
+                            "type": "number"
+                          },
+                          "BwLimit": {
+                            "type": "string"
+                          },
+                          "BwLimitFile": {
+                            "type": "string"
+                          },
+                          "CaCert": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "CheckFirst": {
+                            "type": "boolean"
+                          },
+                          "CheckSum": {
+                            "type": "boolean"
+                          },
+                          "Checkers": {
+                            "type": "number"
+                          },
+                          "ClientCert": {
+                            "type": "string"
+                          },
+                          "ClientKey": {
+                            "type": "string"
+                          },
+                          "CompareDest": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "ConnectTimeout": {
+                            "type": "number"
+                          },
+                          "Cookie": {
+                            "type": "boolean"
+                          },
+                          "CopyDest": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "CutoffMode": {
+                            "type": "string"
+                          },
+                          "DataRateUnit": {
+                            "type": "string"
+                          },
+                          "DefaultTime": {
+                            "type": "string"
+                          },
+                          "DeleteMode": {
+                            "type": "number"
+                          },
+                          "DisableFeatures": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "DisableHTTP2": {
+                            "type": "boolean"
+                          },
+                          "DisableHTTPKeepAlives": {
+                            "type": "boolean"
+                          },
+                          "DownloadHeaders": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "DryRun": {
+                            "type": "boolean"
+                          },
+                          "Dump": {
+                            "type": "string"
+                          },
+                          "ErrorOnNoTransfer": {
+                            "type": "boolean"
+                          },
+                          "ExpectContinueTimeout": {
+                            "type": "number"
+                          },
+                          "FixCase": {
+                            "type": "boolean"
+                          },
+                          "FsCacheExpireDuration": {
+                            "type": "number"
+                          },
+                          "FsCacheExpireInterval": {
+                            "type": "number"
+                          },
+                          "Headers": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "HumanReadable": {
+                            "type": "boolean"
+                          },
+                          "IgnoreCaseSync": {
+                            "type": "boolean"
+                          },
+                          "IgnoreChecksum": {
+                            "type": "boolean"
+                          },
+                          "IgnoreErrors": {
+                            "type": "boolean"
+                          },
+                          "IgnoreExisting": {
+                            "type": "boolean"
+                          },
+                          "IgnoreSize": {
+                            "type": "boolean"
+                          },
+                          "IgnoreTimes": {
+                            "type": "boolean"
+                          },
+                          "Immutable": {
+                            "type": "boolean"
+                          },
+                          "Inplace": {
+                            "type": "boolean"
+                          },
+                          "InsecureSkipVerify": {
+                            "type": "boolean"
+                          },
+                          "Interactive": {
+                            "type": "boolean"
+                          },
+                          "KvLockTime": {
+                            "type": "number"
+                          },
+                          "Links": {
+                            "type": "boolean"
+                          },
+                          "LogLevel": {
+                            "type": "string"
+                          },
+                          "LowLevelRetries": {
+                            "type": "number"
+                          },
+                          "MaxBacklog": {
+                            "type": "number"
+                          },
+                          "MaxBufferMemory": {
+                            "type": "number"
+                          },
+                          "MaxDelete": {
+                            "type": "number"
+                          },
+                          "MaxDeleteSize": {
+                            "type": "number"
+                          },
+                          "MaxDepth": {
+                            "type": "number"
+                          },
+                          "MaxDuration": {
+                            "type": "number"
+                          },
+                          "MaxStatsGroups": {
+                            "type": "number"
+                          },
+                          "MaxTransfer": {
+                            "type": "number"
+                          },
+                          "Metadata": {
+                            "type": "boolean"
+                          },
+                          "MetadataMapper": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "MetadataSet": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "ModifyWindow": {
+                            "type": "number"
+                          },
+                          "MultiThreadChunkSize": {
+                            "type": "number"
+                          },
+                          "MultiThreadCutoff": {
+                            "type": "number"
+                          },
+                          "MultiThreadSet": {
+                            "type": "boolean"
+                          },
+                          "MultiThreadStreams": {
+                            "type": "number"
+                          },
+                          "MultiThreadWriteBufferSize": {
+                            "type": "number"
+                          },
+                          "NoCheckDest": {
+                            "type": "boolean"
+                          },
+                          "NoConsole": {
+                            "type": "boolean"
+                          },
+                          "NoGzip": {
+                            "type": "boolean"
+                          },
+                          "NoTraverse": {
+                            "type": "boolean"
+                          },
+                          "NoUnicodeNormalization": {
+                            "type": "boolean"
+                          },
+                          "NoUpdateDirModTime": {
+                            "type": "boolean"
+                          },
+                          "NoUpdateModTime": {
+                            "type": "boolean"
+                          },
+                          "OrderBy": {
+                            "type": "string"
+                          },
+                          "PartialSuffix": {
+                            "type": "string"
+                          },
+                          "PasswordCommand": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "Progress": {
+                            "type": "boolean"
+                          },
+                          "ProgressTerminalTitle": {
+                            "type": "boolean"
+                          },
+                          "RefreshTimes": {
+                            "type": "boolean"
+                          },
+                          "Retries": {
+                            "type": "number"
+                          },
+                          "RetriesInterval": {
+                            "type": "number"
+                          },
+                          "ServerSideAcrossConfigs": {
+                            "type": "boolean"
+                          },
+                          "SizeOnly": {
+                            "type": "boolean"
+                          },
+                          "StatsFileNameLength": {
+                            "type": "number"
+                          },
+                          "StatsLogLevel": {
+                            "type": "string"
+                          },
+                          "StatsOneLine": {
+                            "type": "boolean"
+                          },
+                          "StatsOneLineDate": {
+                            "type": "boolean"
+                          },
+                          "StatsOneLineDateFormat": {
+                            "type": "string"
+                          },
+                          "StreamingUploadCutoff": {
+                            "type": "number"
+                          },
+                          "Suffix": {
+                            "type": "string"
+                          },
+                          "SuffixKeepExtension": {
+                            "type": "boolean"
+                          },
+                          "TPSLimit": {
+                            "type": "number"
+                          },
+                          "TPSLimitBurst": {
+                            "type": "number"
+                          },
+                          "TerminalColorMode": {
+                            "type": "string"
+                          },
+                          "Timeout": {
+                            "type": "number"
+                          },
+                          "TrackRenames": {
+                            "type": "boolean"
+                          },
+                          "TrackRenamesStrategy": {
+                            "type": "string"
+                          },
+                          "TrafficClass": {
+                            "type": "number"
+                          },
+                          "Transfers": {
+                            "type": "number"
+                          },
+                          "UpdateOlder": {
+                            "type": "boolean"
+                          },
+                          "UploadHeaders": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "UseJSONLog": {
+                            "type": "boolean"
+                          },
+                          "UseListR": {
+                            "type": "boolean"
+                          },
+                          "UseMmap": {
+                            "type": "boolean"
+                          },
+                          "UseServerModTime": {
+                            "type": "boolean"
+                          },
+                          "UserAgent": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": {
+                          "nullable": true
+                        }
+                      }
+                    ],
+                    "description": "A dictionary of config parameters to control the command execution"
+                  },
+                  "_filter": {
+                    "type": "object",
+                    "properties": {
+                      "DeleteExcluded": {
+                        "type": "boolean",
+                        "description": "Delete files that are excluded from the sync"
+                      },
+                      "ExcludeFile": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read exclude patterns from file"
+                      },
+                      "ExcludeFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read exclude patterns from file"
+                      },
+                      "ExcludeRule": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Exclude files matching pattern"
+                      },
+                      "FilesFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read list of source-file names from file"
+                      },
+                      "FilesFromRaw": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read list of source-file names from file without any processing of lines"
+                      },
+                      "FilterFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read filtering patterns from a file"
+                      },
+                      "FilterRule": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Add a file-filtering rule"
+                      },
+                      "HashFilter": {
+                        "type": "string",
+                        "description": "Filter by hash type and value"
+                      },
+                      "IgnoreCase": {
+                        "type": "boolean",
+                        "description": "Ignore case when pattern matching"
+                      },
+                      "IncludeFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read include patterns from file"
+                      },
+                      "IncludeRule": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Include files matching pattern"
+                      },
+                      "MaxAge": {
+                        "type": "number",
+                        "description": "Only transfer files younger than this in seconds"
+                      },
+                      "MaxSize": {
+                        "type": "number",
+                        "description": "Only transfer files smaller than this in bytes"
+                      },
+                      "MetadataExclude": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Exclude metadatas matching pattern"
+                      },
+                      "MetadataExcludeFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read metadata exclude patterns from file (use - to read from stdin)"
+                      },
+                      "MetadataFilter": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Add a metadata filtering rule"
+                      },
+                      "MetadataFilterFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read metadata filtering patterns from a file (use - to read from stdin)"
+                      },
+                      "MetadataInclude": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Include metadatas matching pattern"
+                      },
+                      "MetadataIncludeFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read metadata include patterns from file (use - to read from stdin)"
+                      },
+                      "MinAge": {
+                        "type": "number",
+                        "description": "Only transfer files older than this in seconds"
+                      },
+                      "MinSize": {
+                        "type": "number",
+                        "description": "Only transfer files bigger than this in bytes"
+                      }
+                    },
+                    "description": "A dictionary of filter parameters to apply for this command only"
+                  },
+                  "_group": {
+                    "type": "string",
+                    "description": "Group name for this command to track stats under a custom name"
+                  }
+                },
+                "required": [
+                  "srcFs",
+                  "dstFs"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "input": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      },
+                      "description": "Input parameters that caused the error"
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "API path that was called"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP status code"
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sync/bisync": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "path1": {
+                    "type": "string",
+                    "description": "a remote directory string e.g. drive:path1"
+                  },
+                  "path2": {
+                    "type": "string",
+                    "description": "a remote directory string e.g. drive:path2"
+                  },
+                  "dryRun": {
+                    "type": "boolean",
+                    "description": "dry-run mode"
+                  },
+                  "resync": {
+                    "type": "boolean",
+                    "description": "performs the resync run"
+                  },
+                  "checkAccess": {
+                    "type": "boolean",
+                    "description": "abort if RCLONE_TEST files are not found on both filesystems"
+                  },
+                  "checkFilename": {
+                    "type": "string",
+                    "description": "file name for checkAccess (default: RCLONE_TEST)"
+                  },
+                  "maxDelete": {
+                    "type": "number",
+                    "description": "abort sync if percentage of deleted files is above this threshold (default: 50)"
+                  },
+                  "force": {
+                    "type": "boolean",
+                    "description": "Bypass maxDelete safety check and run the sync"
+                  },
+                  "checkSync": {
+                    "type": "boolean",
+                    "description": "true by default, false disables comparison of final listings, only will skip sync, only compare listings from the last run"
+                  },
+                  "createEmptySrcDirs": {
+                    "type": "boolean",
+                    "description": "Sync creation and deletion of empty directories. (Not compatible with --remove-empty-dirs)"
+                  },
+                  "removeEmptyDirs": {
+                    "type": "boolean",
+                    "description": "remove empty directories at the final cleanup step"
+                  },
+                  "filtersFile": {
+                    "type": "string",
+                    "description": "read filtering patterns from a file"
+                  },
+                  "ignoreListingChecksum": {
+                    "type": "boolean",
+                    "description": "Do not use checksums for listings"
+                  },
+                  "resilient": {
+                    "type": "boolean",
+                    "description": "Allow future runs to retry after certain less-serious errors, instead of requiring resync. Use at your own risk!"
+                  },
+                  "workdir": {
+                    "type": "string",
+                    "description": "server directory for history files (default: ~/.cache/rclone/bisync)"
+                  },
+                  "backupdir1": {
+                    "type": "string",
+                    "description": "--backup-dir for Path1. Must be a non-overlapping path on the same remote."
+                  },
+                  "backupdir2": {
+                    "type": "string",
+                    "description": "--backup-dir for Path2. Must be a non-overlapping path on the same remote."
+                  },
+                  "noCleanup": {
+                    "type": "boolean",
+                    "description": "retain working files"
+                  },
+                  "_async": {
+                    "type": "boolean",
+                    "description": "If set run asynchronously, which means the command will return a job id and then return"
+                  },
+                  "_config": {
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "AskPassword": {
+                            "type": "boolean"
+                          },
+                          "AutoConfirm": {
+                            "type": "boolean"
+                          },
+                          "BackupDir": {
+                            "type": "string"
+                          },
+                          "BindAddr": {
+                            "type": "string"
+                          },
+                          "BufferSize": {
+                            "type": "number"
+                          },
+                          "BwLimit": {
+                            "type": "string"
+                          },
+                          "BwLimitFile": {
+                            "type": "string"
+                          },
+                          "CaCert": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "CheckFirst": {
+                            "type": "boolean"
+                          },
+                          "CheckSum": {
+                            "type": "boolean"
+                          },
+                          "Checkers": {
+                            "type": "number"
+                          },
+                          "ClientCert": {
+                            "type": "string"
+                          },
+                          "ClientKey": {
+                            "type": "string"
+                          },
+                          "CompareDest": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "ConnectTimeout": {
+                            "type": "number"
+                          },
+                          "Cookie": {
+                            "type": "boolean"
+                          },
+                          "CopyDest": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "CutoffMode": {
+                            "type": "string"
+                          },
+                          "DataRateUnit": {
+                            "type": "string"
+                          },
+                          "DefaultTime": {
+                            "type": "string"
+                          },
+                          "DeleteMode": {
+                            "type": "number"
+                          },
+                          "DisableFeatures": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "DisableHTTP2": {
+                            "type": "boolean"
+                          },
+                          "DisableHTTPKeepAlives": {
+                            "type": "boolean"
+                          },
+                          "DownloadHeaders": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "DryRun": {
+                            "type": "boolean"
+                          },
+                          "Dump": {
+                            "type": "string"
+                          },
+                          "ErrorOnNoTransfer": {
+                            "type": "boolean"
+                          },
+                          "ExpectContinueTimeout": {
+                            "type": "number"
+                          },
+                          "FixCase": {
+                            "type": "boolean"
+                          },
+                          "FsCacheExpireDuration": {
+                            "type": "number"
+                          },
+                          "FsCacheExpireInterval": {
+                            "type": "number"
+                          },
+                          "Headers": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "HumanReadable": {
+                            "type": "boolean"
+                          },
+                          "IgnoreCaseSync": {
+                            "type": "boolean"
+                          },
+                          "IgnoreChecksum": {
+                            "type": "boolean"
+                          },
+                          "IgnoreErrors": {
+                            "type": "boolean"
+                          },
+                          "IgnoreExisting": {
+                            "type": "boolean"
+                          },
+                          "IgnoreSize": {
+                            "type": "boolean"
+                          },
+                          "IgnoreTimes": {
+                            "type": "boolean"
+                          },
+                          "Immutable": {
+                            "type": "boolean"
+                          },
+                          "Inplace": {
+                            "type": "boolean"
+                          },
+                          "InsecureSkipVerify": {
+                            "type": "boolean"
+                          },
+                          "Interactive": {
+                            "type": "boolean"
+                          },
+                          "KvLockTime": {
+                            "type": "number"
+                          },
+                          "Links": {
+                            "type": "boolean"
+                          },
+                          "LogLevel": {
+                            "type": "string"
+                          },
+                          "LowLevelRetries": {
+                            "type": "number"
+                          },
+                          "MaxBacklog": {
+                            "type": "number"
+                          },
+                          "MaxBufferMemory": {
+                            "type": "number"
+                          },
+                          "MaxDelete": {
+                            "type": "number"
+                          },
+                          "MaxDeleteSize": {
+                            "type": "number"
+                          },
+                          "MaxDepth": {
+                            "type": "number"
+                          },
+                          "MaxDuration": {
+                            "type": "number"
+                          },
+                          "MaxStatsGroups": {
+                            "type": "number"
+                          },
+                          "MaxTransfer": {
+                            "type": "number"
+                          },
+                          "Metadata": {
+                            "type": "boolean"
+                          },
+                          "MetadataMapper": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "MetadataSet": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "ModifyWindow": {
+                            "type": "number"
+                          },
+                          "MultiThreadChunkSize": {
+                            "type": "number"
+                          },
+                          "MultiThreadCutoff": {
+                            "type": "number"
+                          },
+                          "MultiThreadSet": {
+                            "type": "boolean"
+                          },
+                          "MultiThreadStreams": {
+                            "type": "number"
+                          },
+                          "MultiThreadWriteBufferSize": {
+                            "type": "number"
+                          },
+                          "NoCheckDest": {
+                            "type": "boolean"
+                          },
+                          "NoConsole": {
+                            "type": "boolean"
+                          },
+                          "NoGzip": {
+                            "type": "boolean"
+                          },
+                          "NoTraverse": {
+                            "type": "boolean"
+                          },
+                          "NoUnicodeNormalization": {
+                            "type": "boolean"
+                          },
+                          "NoUpdateDirModTime": {
+                            "type": "boolean"
+                          },
+                          "NoUpdateModTime": {
+                            "type": "boolean"
+                          },
+                          "OrderBy": {
+                            "type": "string"
+                          },
+                          "PartialSuffix": {
+                            "type": "string"
+                          },
+                          "PasswordCommand": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "Progress": {
+                            "type": "boolean"
+                          },
+                          "ProgressTerminalTitle": {
+                            "type": "boolean"
+                          },
+                          "RefreshTimes": {
+                            "type": "boolean"
+                          },
+                          "Retries": {
+                            "type": "number"
+                          },
+                          "RetriesInterval": {
+                            "type": "number"
+                          },
+                          "ServerSideAcrossConfigs": {
+                            "type": "boolean"
+                          },
+                          "SizeOnly": {
+                            "type": "boolean"
+                          },
+                          "StatsFileNameLength": {
+                            "type": "number"
+                          },
+                          "StatsLogLevel": {
+                            "type": "string"
+                          },
+                          "StatsOneLine": {
+                            "type": "boolean"
+                          },
+                          "StatsOneLineDate": {
+                            "type": "boolean"
+                          },
+                          "StatsOneLineDateFormat": {
+                            "type": "string"
+                          },
+                          "StreamingUploadCutoff": {
+                            "type": "number"
+                          },
+                          "Suffix": {
+                            "type": "string"
+                          },
+                          "SuffixKeepExtension": {
+                            "type": "boolean"
+                          },
+                          "TPSLimit": {
+                            "type": "number"
+                          },
+                          "TPSLimitBurst": {
+                            "type": "number"
+                          },
+                          "TerminalColorMode": {
+                            "type": "string"
+                          },
+                          "Timeout": {
+                            "type": "number"
+                          },
+                          "TrackRenames": {
+                            "type": "boolean"
+                          },
+                          "TrackRenamesStrategy": {
+                            "type": "string"
+                          },
+                          "TrafficClass": {
+                            "type": "number"
+                          },
+                          "Transfers": {
+                            "type": "number"
+                          },
+                          "UpdateOlder": {
+                            "type": "boolean"
+                          },
+                          "UploadHeaders": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "UseJSONLog": {
+                            "type": "boolean"
+                          },
+                          "UseListR": {
+                            "type": "boolean"
+                          },
+                          "UseMmap": {
+                            "type": "boolean"
+                          },
+                          "UseServerModTime": {
+                            "type": "boolean"
+                          },
+                          "UserAgent": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": {
+                          "nullable": true
+                        }
+                      }
+                    ],
+                    "description": "A dictionary of config parameters to control the command execution"
+                  },
+                  "_filter": {
+                    "type": "object",
+                    "properties": {
+                      "DeleteExcluded": {
+                        "type": "boolean",
+                        "description": "Delete files that are excluded from the sync"
+                      },
+                      "ExcludeFile": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read exclude patterns from file"
+                      },
+                      "ExcludeFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read exclude patterns from file"
+                      },
+                      "ExcludeRule": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Exclude files matching pattern"
+                      },
+                      "FilesFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read list of source-file names from file"
+                      },
+                      "FilesFromRaw": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read list of source-file names from file without any processing of lines"
+                      },
+                      "FilterFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read filtering patterns from a file"
+                      },
+                      "FilterRule": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Add a file-filtering rule"
+                      },
+                      "HashFilter": {
+                        "type": "string",
+                        "description": "Filter by hash type and value"
+                      },
+                      "IgnoreCase": {
+                        "type": "boolean",
+                        "description": "Ignore case when pattern matching"
+                      },
+                      "IncludeFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read include patterns from file"
+                      },
+                      "IncludeRule": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Include files matching pattern"
+                      },
+                      "MaxAge": {
+                        "type": "number",
+                        "description": "Only transfer files younger than this in seconds"
+                      },
+                      "MaxSize": {
+                        "type": "number",
+                        "description": "Only transfer files smaller than this in bytes"
+                      },
+                      "MetadataExclude": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Exclude metadatas matching pattern"
+                      },
+                      "MetadataExcludeFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read metadata exclude patterns from file (use - to read from stdin)"
+                      },
+                      "MetadataFilter": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Add a metadata filtering rule"
+                      },
+                      "MetadataFilterFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read metadata filtering patterns from a file (use - to read from stdin)"
+                      },
+                      "MetadataInclude": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Include metadatas matching pattern"
+                      },
+                      "MetadataIncludeFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read metadata include patterns from file (use - to read from stdin)"
+                      },
+                      "MinAge": {
+                        "type": "number",
+                        "description": "Only transfer files older than this in seconds"
+                      },
+                      "MinSize": {
+                        "type": "number",
+                        "description": "Only transfer files bigger than this in bytes"
+                      }
+                    },
+                    "description": "A dictionary of filter parameters to apply for this command only"
+                  },
+                  "_group": {
+                    "type": "string",
+                    "description": "Group name for this command to track stats under a custom name"
+                  }
+                },
+                "required": [
+                  "path1",
+                  "path2"
                 ]
               }
             }

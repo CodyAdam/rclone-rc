@@ -1,6 +1,6 @@
 {
   "name": "rclone-rc",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "A fully typed TypeScript API client for Rclone RC",
   "homepage": "https://github.com/CodyAdam/rclone-rc",
   "repository": {
