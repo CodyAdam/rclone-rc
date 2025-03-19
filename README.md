@@ -4,7 +4,7 @@ A fully type-safe TypeScript API client for [Rclone's Remote Control](https://rc
 
 ## ⚠️ Work in Progress
 
-This library is currently under active development. Only 13 out of 87 Rclone RC commands are implemented so far.
+This library is currently under active development. Check out the [current status](current-status.md) for a list of implemented commands.
 
 Consider contributing if you need a specific command:
 
