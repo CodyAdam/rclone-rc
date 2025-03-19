@@ -72,4 +72,86 @@ describe('Sync Operations', () => {
       expect.fail(`Response had an issue : ${JSON.stringify(folderListAfterDryRun.body)}`);
     expect(folderListAfterDryRun.body.list.some(item => item.Path === destFolder)).toBe(false);
   });
+
+  it('should check files different between two remotes', async () => {
+    const check = await client.check({
+      body: {
+        srcFs: ':memory:' + sourceFolder,
+        dstFs: ':memory:' + destFolder,
+      },
+    });
+    if (check.status !== 200) expect.fail(`Response had an issue : ${JSON.stringify(check.body)}`);
+    expect(check.body.success).toBe(false); // since it is different
+    expect(check.body.missingOnDst).toContain(testFileName);
+  });
+  it('should detect files with different content between two remotes', async () => {
+    // Create a file with different content in the destination folder
+    const differentContent = 'This is different content';
+    const formData = new FormData();
+    formData.append(
+      'file0',
+      new File([differentContent], testFileName, {
+        type: 'text/plain',
+      }),
+    );
+    const createDifferentFile = await client.uploadFile({
+      query: {
+        fs: ':memory:',
+        remote: destFolder,
+      },
+      body: formData,
+    });
+    if (createDifferentFile.status !== 200)
+      expect.fail(`Failed to create file with different content: ${JSON.stringify(createDifferentFile.body)}`);
+
+    // Check the two folders
+    const check = await client.check({
+      body: {
+        srcFs: ':memory:' + sourceFolder,
+        dstFs: ':memory:' + destFolder,
+        differ: true,
+      },
+    });
+    if (check.status !== 200) expect.fail(`Response had an issue: ${JSON.stringify(check.body)}`);
+
+    console.log(check.body);
+    // Verify that the check detects the files with different content
+    expect(check.body.success).toBe(false);
+    expect(check.body.differ).toContain(testFileName);
+  });
+  it('should check with the combined option', async () => {
+    // Create a file with different content in the destination folder
+    const differentContent = 'This is different content';
+    const formData = new FormData();
+    formData.append(
+      'file0',
+      new File([differentContent], testFileName, {
+        type: 'text/plain',
+      }),
+    );
+    const createDifferentFile = await client.uploadFile({
+      query: {
+        fs: ':memory:',
+        remote: destFolder,
+      },
+      body: formData,
+    });
+    if (createDifferentFile.status !== 200)
+      expect.fail(`Failed to create file with different content: ${JSON.stringify(createDifferentFile.body)}`);
+
+    // Check the two folders
+    const check = await client.check({
+      body: {
+        srcFs: ':memory:' + sourceFolder,
+        dstFs: ':memory:' + destFolder,
+        combined: true,
+      },
+    });
+    if (check.status !== 200) expect.fail(`Response had an issue: ${JSON.stringify(check.body)}`);
+
+    console.log(check.body);
+    // Verify that the check detects the files with different content
+    expect(check.body.success).toBe(false);
+    expect(check.body.combined).toContain(`* ${testFileName}`);
+  });
 });

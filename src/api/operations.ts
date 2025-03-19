@@ -131,4 +131,39 @@ export const operationsEndpoints = {
       500: errorSchema,
     },
   },
+  check: {
+    method: 'POST',
+    path: '/operations/check' satisfies Paths,
+    body: z
+      .object({
+        srcFs: z.string().describe('a remote name string e.g. "drive:" for the source, "/" for local filesystem'),
+        dstFs: z.string().describe('a remote name string e.g. "drive2:" for the destination, "/" for local filesystem'),
+        download: z.boolean().optional().describe('check by downloading rather than with hash'),
+        checkFileHash: z.string().optional().describe('treat checkFileFs:checkFileRemote as a SUM file with hashes of given type'),
+        checkFileFs: z.string().optional().describe('treat checkFileFs:checkFileRemote as a SUM file with hashes of given type'),
+        checkFileRemote: z.string().optional().describe('treat checkFileFs:checkFileRemote as a SUM file with hashes of given type'),
+        oneWay: z.boolean().optional().describe('check one way only, source files must exist on remote'),
+        combined: z.boolean().optional().describe('make a combined report of changes (default false)'),
+        missingOnSrc: z.boolean().optional().describe('report all files missing from the source (default true)'),
+        missingOnDst: z.boolean().optional().describe('report all files missing from the destination (default true)'),
+        match: z.boolean().optional().describe('report all matching files (default false)'),
+        differ: z.boolean().optional().describe('report all non-matching files (default true)'),
+        error: z.boolean().optional().describe('report all files with errors (hashing or reading) (default true)'),
+      })
+      .extend(globalOptionsSchema.shape),
+    responses: {
+      200: z.object({
+        success: z.boolean().describe('true if no error, false otherwise'),
+        status: z.string().describe('textual summary of check, OK or text string'),
+        hashType: z.string().optional().describe('hash used in check, may be missing'),
+        combined: z.array(z.string()).optional().describe('array of strings of combined report of changes'),
+        missingOnSrc: z.array(z.string()).optional().describe('array of strings of all files missing from the source'),
+        missingOnDst: z.array(z.string()).optional().describe('array of strings of all files missing from the destination'),
+        match: z.array(z.string()).optional().describe('array of strings of all matching files'),
+        differ: z.array(z.string()).optional().describe('array of strings of all non-matching files'),
+        error: z.array(z.string()).optional().describe('array of strings of all files with errors (hashing or reading)'),
+      }),
+      500: errorSchema,
+    },
+  },
 } satisfies Router;
