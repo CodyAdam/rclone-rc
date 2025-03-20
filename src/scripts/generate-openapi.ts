@@ -2,7 +2,7 @@ import { generateOpenApi } from '@ts-rest/open-api';
 import { writeFile } from 'fs/promises';
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
-import { rcloneAsyncContract, rcloneContract } from './index';
+import { rcloneAsyncContract, rcloneContract } from '../index';
 
 // Get current file's directory
 const __filename = fileURLToPath(import.meta.url);

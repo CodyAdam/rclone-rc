@@ -2,8 +2,8 @@ import { writeFile } from 'fs/promises';
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { z } from 'zod';
-import commandsRaw from './api/commands.json';
-import { rcloneContract } from './index';
+import commandsRaw from './commands.json';
+import { rcloneContract } from '../index';
 
 const commandSchema = z.object({
   AuthRequired: z.boolean(),

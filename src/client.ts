@@ -59,7 +59,12 @@ export function createClient(options: RcloneRcOptions = {}) {
 
   const client = initClient(rcloneContract, {
     baseUrl,
-    baseHeaders: username && password ? { auth: `${username}:${password}` } : undefined,
+    baseHeaders:
+      username && password
+        ? {
+            Authorization: `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`,
+          }
+        : undefined,
     validateResponse,
   });
 
@@ -101,7 +106,12 @@ export function createAsyncClient(options: RcloneRcOptions = {}) {
 
   const client = initClient(rcloneAsyncContract, {
     baseUrl,
-    baseHeaders: username && password ? { auth: `${username}:${password}` } : undefined,
+    baseHeaders:
+      username && password
+        ? {
+            Authorization: `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`,
+          }
+        : undefined,
     validateResponse,
   });
 
