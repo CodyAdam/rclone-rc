@@ -49,7 +49,8 @@
                       "additionalProperties": {
                         "nullable": true
                       },
-                      "description": "Input parameters that caused the error"
+                      "description": "Input parameters that caused the error",
+                      "nullable": true
                     },
                     "path": {
                       "type": "string",
@@ -61,7 +62,8 @@
                     }
                   },
                   "required": [
-                    "error"
+                    "error",
+                    "input"
                   ]
                 }
               }
@@ -118,7 +120,8 @@
                       "additionalProperties": {
                         "nullable": true
                       },
-                      "description": "Input parameters that caused the error"
+                      "description": "Input parameters that caused the error",
+                      "nullable": true
                     },
                     "path": {
                       "type": "string",
@@ -130,7 +133,8 @@
                     }
                   },
                   "required": [
-                    "error"
+                    "error",
+                    "input"
                   ]
                 }
               }
@@ -735,7 +739,8 @@
                       "additionalProperties": {
                         "nullable": true
                       },
-                      "description": "Input parameters that caused the error"
+                      "description": "Input parameters that caused the error",
+                      "nullable": true
                     },
                     "path": {
                       "type": "string",
@@ -747,7 +752,8 @@
                     }
                   },
                   "required": [
-                    "error"
+                    "error",
+                    "input"
                   ]
                 }
               }
@@ -1388,7 +1394,8 @@
                       "additionalProperties": {
                         "nullable": true
                       },
-                      "description": "Input parameters that caused the error"
+                      "description": "Input parameters that caused the error",
+                      "nullable": true
                     },
                     "path": {
                       "type": "string",
@@ -1400,7 +1407,8 @@
                     }
                   },
                   "required": [
-                    "error"
+                    "error",
+                    "input"
                   ]
                 }
               }
@@ -1970,7 +1978,8 @@
                       "additionalProperties": {
                         "nullable": true
                       },
-                      "description": "Input parameters that caused the error"
+                      "description": "Input parameters that caused the error",
+                      "nullable": true
                     },
                     "path": {
                       "type": "string",
@@ -1982,7 +1991,8 @@
                     }
                   },
                   "required": [
-                    "error"
+                    "error",
+                    "input"
                   ]
                 }
               }
@@ -2589,7 +2599,8 @@
                       "additionalProperties": {
                         "nullable": true
                       },
-                      "description": "Input parameters that caused the error"
+                      "description": "Input parameters that caused the error",
+                      "nullable": true
                     },
                     "path": {
                       "type": "string",
@@ -2601,7 +2612,8 @@
                     }
                   },
                   "required": [
-                    "error"
+                    "error",
+                    "input"
                   ]
                 }
               }
@@ -3162,7 +3174,8 @@
                       "additionalProperties": {
                         "nullable": true
                       },
-                      "description": "Input parameters that caused the error"
+                      "description": "Input parameters that caused the error",
+                      "nullable": true
                     },
                     "path": {
                       "type": "string",
@@ -3174,7 +3187,8 @@
                     }
                   },
                   "required": [
-                    "error"
+                    "error",
+                    "input"
                   ]
                 }
               }
@@ -3735,7 +3749,8 @@
                       "additionalProperties": {
                         "nullable": true
                       },
-                      "description": "Input parameters that caused the error"
+                      "description": "Input parameters that caused the error",
+                      "nullable": true
                     },
                     "path": {
                       "type": "string",
@@ -3747,7 +3762,8 @@
                     }
                   },
                   "required": [
-                    "error"
+                    "error",
+                    "input"
                   ]
                 }
               }
@@ -4420,6 +4436,42 @@
               }
             }
           },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "input": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      },
+                      "description": "Input parameters that caused the error",
+                      "nullable": true
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "API path that was called"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP status code"
+                    }
+                  },
+                  "required": [
+                    "error",
+                    "input"
+                  ]
+                }
+              }
+            }
+          },
           "500": {
             "description": "500",
             "content": {
@@ -4436,7 +4488,8 @@
                       "additionalProperties": {
                         "nullable": true
                       },
-                      "description": "Input parameters that caused the error"
+                      "description": "Input parameters that caused the error",
+                      "nullable": true
                     },
                     "path": {
                       "type": "string",
@@ -4448,7 +4501,736 @@
                     }
                   },
                   "required": [
-                    "error"
+                    "error",
+                    "input"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/operations/stat": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fs": {
+                    "type": "string",
+                    "description": "a remote name string e.g. \"drive:\""
+                  },
+                  "remote": {
+                    "type": "string",
+                    "description": "a path within that remote e.g. \"dir\""
+                  },
+                  "opt": {
+                    "type": "object",
+                    "properties": {
+                      "recurse": {
+                        "type": "boolean",
+                        "description": "If set recurse directories"
+                      },
+                      "noModTime": {
+                        "type": "boolean",
+                        "description": "If set return modification time"
+                      },
+                      "showEncrypted": {
+                        "type": "boolean",
+                        "description": "If set show decrypted names"
+                      },
+                      "showOrigIDs": {
+                        "type": "boolean",
+                        "description": "If set show the IDs for each item if known"
+                      },
+                      "showHash": {
+                        "type": "boolean",
+                        "description": "If set return a dictionary of hashes"
+                      },
+                      "noMimeType": {
+                        "type": "boolean",
+                        "description": "If set don't show mime types"
+                      },
+                      "dirsOnly": {
+                        "type": "boolean",
+                        "description": "If set only show directories"
+                      },
+                      "filesOnly": {
+                        "type": "boolean",
+                        "description": "If set only show files"
+                      },
+                      "metadata": {
+                        "type": "boolean",
+                        "description": "If set return metadata of objects also"
+                      },
+                      "hashTypes": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "array of strings of hash types to show if showHash set"
+                      }
+                    },
+                    "description": "a dictionary of options to control the listing (optional)"
+                  },
+                  "_async": {
+                    "type": "boolean",
+                    "description": "If set run asynchronously, which means the command will return a job id and then return"
+                  },
+                  "_config": {
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "AskPassword": {
+                            "type": "boolean"
+                          },
+                          "AutoConfirm": {
+                            "type": "boolean"
+                          },
+                          "BackupDir": {
+                            "type": "string"
+                          },
+                          "BindAddr": {
+                            "type": "string"
+                          },
+                          "BufferSize": {
+                            "type": "number"
+                          },
+                          "BwLimit": {
+                            "type": "string"
+                          },
+                          "BwLimitFile": {
+                            "type": "string"
+                          },
+                          "CaCert": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "CheckFirst": {
+                            "type": "boolean"
+                          },
+                          "CheckSum": {
+                            "type": "boolean"
+                          },
+                          "Checkers": {
+                            "type": "number"
+                          },
+                          "ClientCert": {
+                            "type": "string"
+                          },
+                          "ClientKey": {
+                            "type": "string"
+                          },
+                          "CompareDest": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "ConnectTimeout": {
+                            "type": "number"
+                          },
+                          "Cookie": {
+                            "type": "boolean"
+                          },
+                          "CopyDest": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "CutoffMode": {
+                            "type": "string"
+                          },
+                          "DataRateUnit": {
+                            "type": "string"
+                          },
+                          "DefaultTime": {
+                            "type": "string"
+                          },
+                          "DeleteMode": {
+                            "type": "number"
+                          },
+                          "DisableFeatures": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "DisableHTTP2": {
+                            "type": "boolean"
+                          },
+                          "DisableHTTPKeepAlives": {
+                            "type": "boolean"
+                          },
+                          "DownloadHeaders": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "DryRun": {
+                            "type": "boolean"
+                          },
+                          "Dump": {
+                            "type": "string"
+                          },
+                          "ErrorOnNoTransfer": {
+                            "type": "boolean"
+                          },
+                          "ExpectContinueTimeout": {
+                            "type": "number"
+                          },
+                          "FixCase": {
+                            "type": "boolean"
+                          },
+                          "FsCacheExpireDuration": {
+                            "type": "number"
+                          },
+                          "FsCacheExpireInterval": {
+                            "type": "number"
+                          },
+                          "Headers": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "HumanReadable": {
+                            "type": "boolean"
+                          },
+                          "IgnoreCaseSync": {
+                            "type": "boolean"
+                          },
+                          "IgnoreChecksum": {
+                            "type": "boolean"
+                          },
+                          "IgnoreErrors": {
+                            "type": "boolean"
+                          },
+                          "IgnoreExisting": {
+                            "type": "boolean"
+                          },
+                          "IgnoreSize": {
+                            "type": "boolean"
+                          },
+                          "IgnoreTimes": {
+                            "type": "boolean"
+                          },
+                          "Immutable": {
+                            "type": "boolean"
+                          },
+                          "Inplace": {
+                            "type": "boolean"
+                          },
+                          "InsecureSkipVerify": {
+                            "type": "boolean"
+                          },
+                          "Interactive": {
+                            "type": "boolean"
+                          },
+                          "KvLockTime": {
+                            "type": "number"
+                          },
+                          "Links": {
+                            "type": "boolean"
+                          },
+                          "LogLevel": {
+                            "type": "string"
+                          },
+                          "LowLevelRetries": {
+                            "type": "number"
+                          },
+                          "MaxBacklog": {
+                            "type": "number"
+                          },
+                          "MaxBufferMemory": {
+                            "type": "number"
+                          },
+                          "MaxDelete": {
+                            "type": "number"
+                          },
+                          "MaxDeleteSize": {
+                            "type": "number"
+                          },
+                          "MaxDepth": {
+                            "type": "number"
+                          },
+                          "MaxDuration": {
+                            "type": "number"
+                          },
+                          "MaxStatsGroups": {
+                            "type": "number"
+                          },
+                          "MaxTransfer": {
+                            "type": "number"
+                          },
+                          "Metadata": {
+                            "type": "boolean"
+                          },
+                          "MetadataMapper": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "MetadataSet": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "ModifyWindow": {
+                            "type": "number"
+                          },
+                          "MultiThreadChunkSize": {
+                            "type": "number"
+                          },
+                          "MultiThreadCutoff": {
+                            "type": "number"
+                          },
+                          "MultiThreadSet": {
+                            "type": "boolean"
+                          },
+                          "MultiThreadStreams": {
+                            "type": "number"
+                          },
+                          "MultiThreadWriteBufferSize": {
+                            "type": "number"
+                          },
+                          "NoCheckDest": {
+                            "type": "boolean"
+                          },
+                          "NoConsole": {
+                            "type": "boolean"
+                          },
+                          "NoGzip": {
+                            "type": "boolean"
+                          },
+                          "NoTraverse": {
+                            "type": "boolean"
+                          },
+                          "NoUnicodeNormalization": {
+                            "type": "boolean"
+                          },
+                          "NoUpdateDirModTime": {
+                            "type": "boolean"
+                          },
+                          "NoUpdateModTime": {
+                            "type": "boolean"
+                          },
+                          "OrderBy": {
+                            "type": "string"
+                          },
+                          "PartialSuffix": {
+                            "type": "string"
+                          },
+                          "PasswordCommand": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "Progress": {
+                            "type": "boolean"
+                          },
+                          "ProgressTerminalTitle": {
+                            "type": "boolean"
+                          },
+                          "RefreshTimes": {
+                            "type": "boolean"
+                          },
+                          "Retries": {
+                            "type": "number"
+                          },
+                          "RetriesInterval": {
+                            "type": "number"
+                          },
+                          "ServerSideAcrossConfigs": {
+                            "type": "boolean"
+                          },
+                          "SizeOnly": {
+                            "type": "boolean"
+                          },
+                          "StatsFileNameLength": {
+                            "type": "number"
+                          },
+                          "StatsLogLevel": {
+                            "type": "string"
+                          },
+                          "StatsOneLine": {
+                            "type": "boolean"
+                          },
+                          "StatsOneLineDate": {
+                            "type": "boolean"
+                          },
+                          "StatsOneLineDateFormat": {
+                            "type": "string"
+                          },
+                          "StreamingUploadCutoff": {
+                            "type": "number"
+                          },
+                          "Suffix": {
+                            "type": "string"
+                          },
+                          "SuffixKeepExtension": {
+                            "type": "boolean"
+                          },
+                          "TPSLimit": {
+                            "type": "number"
+                          },
+                          "TPSLimitBurst": {
+                            "type": "number"
+                          },
+                          "TerminalColorMode": {
+                            "type": "string"
+                          },
+                          "Timeout": {
+                            "type": "number"
+                          },
+                          "TrackRenames": {
+                            "type": "boolean"
+                          },
+                          "TrackRenamesStrategy": {
+                            "type": "string"
+                          },
+                          "TrafficClass": {
+                            "type": "number"
+                          },
+                          "Transfers": {
+                            "type": "number"
+                          },
+                          "UpdateOlder": {
+                            "type": "boolean"
+                          },
+                          "UploadHeaders": {
+                            "type": "string",
+                            "format": "null",
+                            "nullable": true
+                          },
+                          "UseJSONLog": {
+                            "type": "boolean"
+                          },
+                          "UseListR": {
+                            "type": "boolean"
+                          },
+                          "UseMmap": {
+                            "type": "boolean"
+                          },
+                          "UseServerModTime": {
+                            "type": "boolean"
+                          },
+                          "UserAgent": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": {
+                          "nullable": true
+                        }
+                      }
+                    ],
+                    "description": "A dictionary of config parameters to control the command execution"
+                  },
+                  "_filter": {
+                    "type": "object",
+                    "properties": {
+                      "DeleteExcluded": {
+                        "type": "boolean",
+                        "description": "Delete files that are excluded from the sync"
+                      },
+                      "ExcludeFile": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read exclude patterns from file"
+                      },
+                      "ExcludeFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read exclude patterns from file"
+                      },
+                      "ExcludeRule": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Exclude files matching pattern"
+                      },
+                      "FilesFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read list of source-file names from file"
+                      },
+                      "FilesFromRaw": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read list of source-file names from file without any processing of lines"
+                      },
+                      "FilterFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read filtering patterns from a file"
+                      },
+                      "FilterRule": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Add a file-filtering rule"
+                      },
+                      "HashFilter": {
+                        "type": "string",
+                        "description": "Filter by hash type and value"
+                      },
+                      "IgnoreCase": {
+                        "type": "boolean",
+                        "description": "Ignore case when pattern matching"
+                      },
+                      "IncludeFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read include patterns from file"
+                      },
+                      "IncludeRule": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Include files matching pattern"
+                      },
+                      "MaxAge": {
+                        "type": "number",
+                        "description": "Only transfer files younger than this in seconds"
+                      },
+                      "MaxSize": {
+                        "type": "number",
+                        "description": "Only transfer files smaller than this in bytes"
+                      },
+                      "MetadataExclude": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Exclude metadatas matching pattern"
+                      },
+                      "MetadataExcludeFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read metadata exclude patterns from file (use - to read from stdin)"
+                      },
+                      "MetadataFilter": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Add a metadata filtering rule"
+                      },
+                      "MetadataFilterFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read metadata filtering patterns from a file (use - to read from stdin)"
+                      },
+                      "MetadataInclude": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Include metadatas matching pattern"
+                      },
+                      "MetadataIncludeFrom": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Read metadata include patterns from file (use - to read from stdin)"
+                      },
+                      "MinAge": {
+                        "type": "number",
+                        "description": "Only transfer files older than this in seconds"
+                      },
+                      "MinSize": {
+                        "type": "number",
+                        "description": "Only transfer files bigger than this in bytes"
+                      }
+                    },
+                    "description": "A dictionary of filter parameters to apply for this command only"
+                  },
+                  "_group": {
+                    "type": "string",
+                    "description": "Group name for this command to track stats under a custom name"
+                  }
+                },
+                "required": [
+                  "fs",
+                  "remote"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Path": {
+                      "type": "string",
+                      "description": "Full path of the item"
+                    },
+                    "Name": {
+                      "type": "string",
+                      "description": "Name of the item"
+                    },
+                    "Size": {
+                      "type": "number",
+                      "description": "Size of the item in bytes"
+                    },
+                    "MimeType": {
+                      "type": "string",
+                      "description": "MIME type of the item"
+                    },
+                    "ModTime": {
+                      "type": "string",
+                      "description": "Modification time of the item"
+                    },
+                    "IsDir": {
+                      "type": "boolean",
+                      "description": "Whether the item is a directory"
+                    },
+                    "Hashes": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Hashes of the item (SHA-1, MD5, DropboxHash, etc.)"
+                    },
+                    "ID": {
+                      "type": "string",
+                      "description": "ID of the item"
+                    },
+                    "OrigID": {
+                      "type": "string",
+                      "description": "Original ID of the item"
+                    },
+                    "IsBucket": {
+                      "type": "boolean",
+                      "description": "Whether the item is a bucket"
+                    },
+                    "Tier": {
+                      "type": "string",
+                      "description": "Storage tier of the item (e.g., \"hot\")"
+                    },
+                    "Encrypted": {
+                      "type": "string",
+                      "description": "Encrypted name of the item"
+                    },
+                    "EncryptedPath": {
+                      "type": "string",
+                      "description": "Encrypted path of the item"
+                    },
+                    "Metadata": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      },
+                      "description": "Additional metadata of the item"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "input": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      },
+                      "description": "Input parameters that caused the error",
+                      "nullable": true
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "API path that was called"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP status code"
+                    }
+                  },
+                  "required": [
+                    "error",
+                    "input"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "input": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      },
+                      "description": "Input parameters that caused the error",
+                      "nullable": true
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "API path that was called"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP status code"
+                    }
+                  },
+                  "required": [
+                    "error",
+                    "input"
                   ]
                 }
               }
@@ -5033,7 +5815,8 @@
                       "additionalProperties": {
                         "nullable": true
                       },
-                      "description": "Input parameters that caused the error"
+                      "description": "Input parameters that caused the error",
+                      "nullable": true
                     },
                     "path": {
                       "type": "string",
@@ -5045,7 +5828,8 @@
                     }
                   },
                   "required": [
-                    "error"
+                    "error",
+                    "input"
                   ]
                 }
               }
@@ -5633,7 +6417,8 @@
                       "additionalProperties": {
                         "nullable": true
                       },
-                      "description": "Input parameters that caused the error"
+                      "description": "Input parameters that caused the error",
+                      "nullable": true
                     },
                     "path": {
                       "type": "string",
@@ -5645,7 +6430,8 @@
                     }
                   },
                   "required": [
-                    "error"
+                    "error",
+                    "input"
                   ]
                 }
               }
@@ -6211,7 +6997,8 @@
                       "additionalProperties": {
                         "nullable": true
                       },
-                      "description": "Input parameters that caused the error"
+                      "description": "Input parameters that caused the error",
+                      "nullable": true
                     },
                     "path": {
                       "type": "string",
@@ -6223,7 +7010,8 @@
                     }
                   },
                   "required": [
-                    "error"
+                    "error",
+                    "input"
                   ]
                 }
               }
@@ -6789,7 +7577,8 @@
                       "additionalProperties": {
                         "nullable": true
                       },
-                      "description": "Input parameters that caused the error"
+                      "description": "Input parameters that caused the error",
+                      "nullable": true
                     },
                     "path": {
                       "type": "string",
@@ -6801,7 +7590,8 @@
                     }
                   },
                   "required": [
-                    "error"
+                    "error",
+                    "input"
                   ]
                 }
               }
@@ -7367,7 +8157,8 @@
                       "additionalProperties": {
                         "nullable": true
                       },
-                      "description": "Input parameters that caused the error"
+                      "description": "Input parameters that caused the error",
+                      "nullable": true
                     },
                     "path": {
                       "type": "string",
@@ -7379,7 +8170,8 @@
                     }
                   },
                   "required": [
-                    "error"
+                    "error",
+                    "input"
                   ]
                 }
               }
@@ -8048,7 +8840,8 @@
                       "additionalProperties": {
                         "nullable": true
                       },
-                      "description": "Input parameters that caused the error"
+                      "description": "Input parameters that caused the error",
+                      "nullable": true
                     },
                     "path": {
                       "type": "string",
@@ -8060,7 +8853,8 @@
                     }
                   },
                   "required": [
-                    "error"
+                    "error",
+                    "input"
                   ]
                 }
               }
@@ -8630,7 +9424,8 @@
                       "additionalProperties": {
                         "nullable": true
                       },
-                      "description": "Input parameters that caused the error"
+                      "description": "Input parameters that caused the error",
+                      "nullable": true
                     },
                     "path": {
                       "type": "string",
@@ -8642,7 +9437,8 @@
                     }
                   },
                   "required": [
-                    "error"
+                    "error",
+                    "input"
                   ]
                 }
               }
@@ -9212,7 +10008,8 @@
                       "additionalProperties": {
                         "nullable": true
                       },
-                      "description": "Input parameters that caused the error"
+                      "description": "Input parameters that caused the error",
+                      "nullable": true
                     },
                     "path": {
                       "type": "string",
@@ -9224,7 +10021,8 @@
                     }
                   },
                   "required": [
-                    "error"
+                    "error",
+                    "input"
                   ]
                 }
               }
@@ -9798,7 +10596,8 @@
                       "additionalProperties": {
                         "nullable": true
                       },
-                      "description": "Input parameters that caused the error"
+                      "description": "Input parameters that caused the error",
+                      "nullable": true
                     },
                     "path": {
                       "type": "string",
@@ -9810,7 +10609,8 @@
                     }
                   },
                   "required": [
-                    "error"
+                    "error",
+                    "input"
                   ]
                 }
               }
@@ -10440,7 +11240,8 @@
                       "additionalProperties": {
                         "nullable": true
                       },
-                      "description": "Input parameters that caused the error"
+                      "description": "Input parameters that caused the error",
+                      "nullable": true
                     },
                     "path": {
                       "type": "string",
@@ -10452,7 +11253,8 @@
                     }
                   },
                   "required": [
-                    "error"
+                    "error",
+                    "input"
                   ]
                 }
               }
@@ -11588,6 +12390,115 @@
                   "required": [
                     "config",
                     "filter"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{fs}/{remote}": {
+      "get": {
+        "description": "Download a file from a remote filesystem",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "fs",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "remote",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Binary file content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Binary file content",
+                  "nullable": true
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "input": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      },
+                      "description": "Input parameters that caused the error",
+                      "nullable": true
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "API path that was called"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP status code"
+                    }
+                  },
+                  "required": [
+                    "error",
+                    "input"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "500",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "input": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "nullable": true
+                      },
+                      "description": "Input parameters that caused the error",
+                      "nullable": true
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "API path that was called"
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "HTTP status code"
+                    }
+                  },
+                  "required": [
+                    "error",
+                    "input"
                   ]
                 }
               }

@@ -7,6 +7,7 @@ import { AsyncContract, Router } from './shared';
 import { syncEndpoints } from './sync';
 import { optionsEndpoints } from './options';
 import { jobEndpoints } from './job';
+import { downloadEndpoints } from './download';
 
 const c = initContract();
 
@@ -18,6 +19,7 @@ const spec = {
   ...syncEndpoints,
   ...optionsEndpoints,
   ...jobEndpoints,
+  ...downloadEndpoints,
 } satisfies Router;
 
 // Create the contract from the combined spec

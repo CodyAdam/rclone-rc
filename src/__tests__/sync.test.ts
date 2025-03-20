@@ -114,7 +114,6 @@ describe('Sync Operations', () => {
     });
     if (check.status !== 200) expect.fail(`Response had an issue: ${JSON.stringify(check.body)}`);
 
-    console.log(check.body);
     // Verify that the check detects the files with different content
     expect(check.body.success).toBe(false);
     expect(check.body.differ).toContain(testFileName);
@@ -149,7 +148,6 @@ describe('Sync Operations', () => {
     });
     if (check.status !== 200) expect.fail(`Response had an issue: ${JSON.stringify(check.body)}`);
 
-    console.log(check.body);
     // Verify that the check detects the files with different content
     expect(check.body.success).toBe(false);
     expect(check.body.combined).toContain(`* ${testFileName}`);

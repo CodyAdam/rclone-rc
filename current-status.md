@@ -2,12 +2,13 @@
 
 # Current completed endpoints
 
-Percentage complete: 22.99% (20/87)
+Percentage complete: **25.29%** (22/87)
 
 *🔒: Requires authentication*
 
 | Endpoint | Done | Alias | Description |
 |----------|------|-------|-------------|
+| [:fs]/:remote | ✅ | `api.download()` | 🔒 Download a file from a remote filesystem (Requires `--rc-serve` or `--rc-web-gui`) |
 | backend/command | ❌ |  | 🔒 Runs a backend command. |
 | config/create | ❌ |  | 🔒 create the config for a remote. |
 | config/delete | ❌ |  | 🔒 Delete a remote in the config file. |
@@ -67,7 +68,7 @@ Percentage complete: 22.99% (20/87)
 | operations/settier | ❌ |  | 🔒 Changes storage tier or class on all files in the path |
 | operations/settierfile | ❌ |  | 🔒 Changes storage tier or class on the single file pointed to |
 | operations/size | ❌ |  | 🔒 Count the number of bytes and files in remote |
-| operations/stat | ❌ |  | 🔒 Give information about the supplied file or directory |
+| operations/stat | ✅ | `api.stat()` | 🔒 Give information about the supplied file or directory |
 | operations/uploadfile | ✅ | `api.uploadFile()` | 🔒 Upload file using multiform/form-data |
 | options/blocks | ❌ |  | List all the option blocks |
 | options/get | ❌ |  | Get all the global options |

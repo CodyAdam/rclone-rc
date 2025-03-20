@@ -49,6 +49,7 @@ Percentage complete: **${((done / total) * 100).toFixed(2)}%** (${done}/${total}
 
 | Endpoint | Done | Alias | Description |
 |----------|------|-------|-------------|
+| [:fs]/:remote | ✅ | \`api.download()\` | 🔒 Download a file from a remote filesystem (Requires \`--rc-serve\` or \`--rc-web-gui\`) |
 ${commands
   .map(command => {
     const endpoint = getIfImplemented(command);

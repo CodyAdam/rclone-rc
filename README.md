@@ -43,7 +43,7 @@ pnpm add rclone-rc
 ```typescript
 import { createClient } from 'rclone-rc';
 
-const client = createClient({
+const api = createClient({
   baseUrl: 'http://localhost:5572',
   username: 'your-username', // Optional if running with --rc-no-auth
   password: 'your-password', // Optional if running with --rc-no-auth
@@ -51,7 +51,7 @@ const client = createClient({
 
 try {
   // Get rclone version with typed response
-  const { status, body } = await client.version();
+  const { status, body } = await api.version();
 
   if (status === 200) {
     console.log('Rclone version:', body.version); // typed
@@ -60,7 +60,7 @@ try {
   }
 
   // List files with type-safe parameters and response
-  const files = await client.list({
+  const files = await api.list({
     body: { fs: 'remote:path', remote: '' }
   });
 
@@ -85,23 +85,25 @@ This library handles errors in two ways:
 For long-running operations:
 
 ```typescript
-import { createAsyncClient } from 'rclone-rc';
+import { createClient, createAsyncClient } from 'rclone-rc';
 
-const asyncClient = createAsyncClient({ baseUrl: 'http://localhost:5572' });
+const api = createClient({ baseUrl: 'http://localhost:5572' });
+const asyncApi = createAsyncClient({ baseUrl: 'http://localhost:5572' });
 
 try {
   // Start async job
-  const job = await asyncClient.list({
+  const job = await asyncApi.list({
     body: {
       fs: 'remote:path',
       remote: '',
-      _async: true, // Type-safe flag for async operations
+      _async: true, // You need to pass this flag to the async client
     }
   });
 
   // Access job ID and check status
   const jobId = job.body.jobid;
-  const status = await client.jobStatus({ body: { jobid: jobId } });
+  // Check job status using the non-async client
+  const status = await api.jobStatus({ body: { jobid: jobId } });
 
   if (status.status === 200 && status.body.finished) {
     console.log('Job output:', status.body.output);
@@ -118,7 +120,7 @@ Zod validates both request and response types at runtime:
 - **Request validation**: Parameters, body, and query are validated before sending
 - **Response validation**: Can be disabled with `validateResponse: false` in client options
   ```typescript
-  const client = createClient({
+  const api = createClient({
     baseUrl: 'http://localhost:5572',
     validateResponse: false, // true by default
   });

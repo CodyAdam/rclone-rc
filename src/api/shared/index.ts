@@ -97,7 +97,7 @@ export type Paths =
 
 export const errorSchema = z.object({
   error: z.string().describe('Error message'),
-  input: z.record(z.unknown()).optional().describe('Input parameters that caused the error'),
+  input: z.record(z.unknown()).nullable().describe('Input parameters that caused the error'),
   path: z.string().optional().describe('API path that was called'),
   status: z.number().optional().describe('HTTP status code'),
 });
